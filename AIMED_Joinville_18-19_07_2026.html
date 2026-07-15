@@ -6447,15 +6447,15 @@ function renderPractice(prompts) {
         <button class="action-btn primary" onclick="copyPrompt(this)">
           <span class="icon">⎘</span> Copiar prompt
         </button>
-        <a class="action-btn" href="#" target="_blank" rel="noopener noreferrer" onclick="return openAI(event, this, 'chatgpt')">
+        <button class="action-btn" onclick="openAI('chatgpt')">
           <span class="icon">◔</span> Abrir no ChatGPT
-        </a>
-        <a class="action-btn" href="#" target="_blank" rel="noopener noreferrer" onclick="return openAI(event, this, 'claude')">
+        </button>
+        <button class="action-btn" onclick="openAI('claude')">
           <span class="icon">◑</span> Abrir no Claude
-        </a>
-        <a class="action-btn" href="#" target="_blank" rel="noopener noreferrer" onclick="return openAI(event, this, 'gemini')">
+        </button>
+        <button class="action-btn" onclick="openAI('gemini')">
           <span class="icon">◕</span> Abrir no Gemini
-        </a>
+        </button>
       </div>
     </section>
   `;
@@ -6691,7 +6691,7 @@ const PLATAFORMAS_IA = {
   }
 };
 
-function openAI(event, anchorEl, platform, targetId) { const config = PLATAFORMAS_IA[platform]; if (!config) { console.error('Plataforma desconhecida:', platform); if (event) event.preventDefault(); return false; } const id = targetId || 'promptText'; const el = document.getElementById(id); if (!el) { showToast('⚠ Prompt não encontrado'); if (event) event.preventDefault(); return false; } const promptText = el.innerText; anchorEl.href = config.url(promptText); if (config.precisaCopiar) { const copiaOk = copiarSincrono(promptText); showToast(copiaOk ? config.msgSucesso : `⚠ Cópia falhou — copie o prompt manualmente e cole no ${config.nome}`); } else { showToast(config.msgSucesso); } return true; }
+function openAI(platform, targetId) { const config = PLATAFORMAS_IA[platform]; if (!config) { console.error('Plataforma desconhecida:', platform); return; } const id = targetId || 'promptText'; const el = document.getElementById(id); if (!el) { showToast('⚠ Prompt não encontrado'); return; } const promptText = el.innerText; const novaJanela = window.open(config.url(promptText), '_blank', 'noopener'); if (!novaJanela) { showToast(`⚠ Pop-up bloqueado — libere pop-ups para abrir o ${config.nome}`); return; } if (config.precisaCopiar) { setTimeout(() => { const copiaOk = copiarSincrono(promptText); showToast(copiaOk ? config.msgSucesso : `⚠ Cópia falhou — copie o prompt manualmente e cole no ${config.nome}`); }, 60); } else { showToast(config.msgSucesso); } }
 
 // Timeout do toast em escopo de módulo para permitir clearTimeout entre chamadas
 let _toastTimeoutId = null;
@@ -8257,15 +8257,15 @@ function renderPromptUnico(b) {
         <button class="action-btn primary" onclick="copyPrompt(this)">
           <span class="icon">⎘</span> Copiar prompt
         </button>
-        <a class="action-btn" href="#" target="_blank" rel="noopener noreferrer" onclick="return openAI(event, this, 'chatgpt')">
+        <button class="action-btn" onclick="openAI('chatgpt')">
           <span class="icon">◔</span> Abrir no ChatGPT
-        </a>
-        <a class="action-btn" href="#" target="_blank" rel="noopener noreferrer" onclick="return openAI(event, this, 'claude')">
+        </button>
+        <button class="action-btn" onclick="openAI('claude')">
           <span class="icon">◑</span> Abrir no Claude
-        </a>
-        <a class="action-btn" href="#" target="_blank" rel="noopener noreferrer" onclick="return openAI(event, this, 'gemini')">
+        </button>
+        <button class="action-btn" onclick="openAI('gemini')">
           <span class="icon">◕</span> Abrir no Gemini
-        </a>
+        </button>
       </div>
     </section>
   `;
@@ -8512,10 +8512,10 @@ function renderKitOrquestracao(kit) {
 
     // Botão da IA principal do passo (destaque primário) + copiar + alternativas
     const botaoPrincipal = step.platform === 'chatgpt'
-      ? `<a class="action-btn primary" href="#" target="_blank" rel="noopener noreferrer" onclick="return openAI(event, this, 'chatgpt', '${promptId}')"><span class="icon">◔</span> Abrir no ChatGPT</a>`
+      ? `<button class="action-btn primary" onclick="openAI('chatgpt', '${promptId}')"><span class="icon">◔</span> Abrir no ChatGPT</button>`
       : step.platform === 'claude'
-        ? `<a class="action-btn primary" href="#" target="_blank" rel="noopener noreferrer" onclick="return openAI(event, this, 'claude', '${promptId}')"><span class="icon">◑</span> Abrir no Claude</a>`
-        : `<a class="action-btn primary" href="#" target="_blank" rel="noopener noreferrer" onclick="return openAI(event, this, 'gemini', '${promptId}')"><span class="icon">◕</span> Abrir no Gemini</a>`;
+        ? `<button class="action-btn primary" onclick="openAI('claude', '${promptId}')"><span class="icon">◑</span> Abrir no Claude</button>`
+        : `<button class="action-btn primary" onclick="openAI('gemini', '${promptId}')"><span class="icon">◕</span> Abrir no Gemini</button>`;
 
     return `
       <section class="kit-step ${step.platform}">
