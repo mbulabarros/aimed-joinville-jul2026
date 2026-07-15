@@ -6332,7 +6332,7 @@ function selectModule(id) {
   document.getElementById('sidebar').classList.remove('open');
   // Usa replaceState para não empurrar entrada no history e não disparar hashchange em loop
   if (window.location.hash !== '#' + id) {
-    history.replaceState(null, '', '#' + id);
+    history.pushState(null, '', '#' + id);
   }
   const mainEl = document.querySelector('.main');
   if (mainEl) mainEl.scrollTop = 0;
@@ -8154,7 +8154,7 @@ function showBiblioteca() {
   document.getElementById('sidebar').classList.remove('open');
   currentModuleId = '__biblioteca__';
   if (window.location.hash !== '#biblioteca') {
-    history.replaceState(null, '', '#biblioteca');
+    history.pushState(null, '', '#biblioteca');
   }
   window.scrollTo({ top: 0, behavior: 'smooth' });
 
