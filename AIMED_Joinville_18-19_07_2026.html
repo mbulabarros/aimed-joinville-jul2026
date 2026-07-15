@@ -6388,7 +6388,7 @@ function renderAvatar(modulo) {
         </div>
         <div class="avatar-video${isShort(modulo.avatar) ? ' is-short' : ''}">
           <iframe 
-            src="https://www.youtube.com/embed/${modulo.avatar}?rel=0&cc_load_policy=1&modestbranding=1&iv_load_policy=3" 
+            src="https://www.youtube.com/embed/${modulo.avatar}?rel=0&cc_load_policy=0&modestbranding=1&iv_load_policy=3" 
             title="Vídeo do Módulo"
             loading="lazy"
             referrerpolicy="strict-origin-when-cross-origin"
@@ -6706,14 +6706,7 @@ function openAI(platform, targetId) {
   }
   const promptText = el.innerText;
 
-  // 1. Se precisa copiar, copia ANTES de abrir a janela (síncrono, sem race)
-  let copiaOk = true;
-  if (config.precisaCopiar) {
-    copiaOk = copiarSincrono(promptText);
-  }
-
-  // 2. Abre a janela no mesmo tick do clique (evita pop-up blocker)
-  const novaJanela = window.open(config.url(promptText), '_blank', 'noopener,noreferrer');
+  /* Abre a janela IMEDIATAMENTE apos o clique — evita bloqueio de pop-up no mobile */ const novaJanela = window.open(config.url(promptText), '_blank', 'noopener,noreferrer'); let copiaOk = true; if (config.precisaCopiar) { copiaOk = copiarSincrono(promptText); }
 
   // 3. Feedback honesto baseado no que realmente aconteceu
   if (!novaJanela) {
