@@ -3616,6 +3616,36 @@ abbr.gloss:hover::before {
   }
 }
 
+
+/* ==============================================================
+   LINKS ÚTEIS OVERLAY
+   ============================================================== */
+#links-overlay {
+  position: fixed; inset: 0;
+  z-index: 200;
+  display: none;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+#links-overlay.open { display: flex; }
+
+.links-group { margin-bottom: 20px; }
+.links-group:last-child { margin-bottom: 0; }
+.links-cat-title {
+  font-family: 'DM Mono', monospace; font-size: 10px;
+  font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 12px;
+}
+.links-items { display: flex; flex-direction: column; gap: 8px; }
+.links-card {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 14px; background: var(--navy-light);
+  border: 1px solid rgba(255,255,255,0.06); border-radius: 10px;
+  text-decoration: none; transition: border-color 0.2s;
+}
+.links-card:hover { border-color: var(--gold-dim); }
+.links-name { color: var(--gray-300); font-size: 0.9rem; }
+.links-domain { color: var(--gray-500); font-size: 0.72rem; white-space: nowrap; margin-left: 12px; }
 </style>
 </head>
 <body>
@@ -3640,7 +3670,12 @@ abbr.gloss:hover::before {
       <span class="biblioteca-label">Biblioteca AIMED</span>
       <span class="biblioteca-arrow">→</span>
     </button>
-    <nav class="trail" id="trail">
+        <button class="biblioteca-btn" id="linksBtn" onclick="showLinks()">
+      <span class="biblioteca-icon">🔗</span>
+      <span class="biblioteca-label">Links Úteis</span>
+      <span class="biblioteca-arrow">→</span>
+    </button>
+<nav class="trail" id="trail">
       </nav>
     <div class="colofao">
       <button type="button" class="colofao-link" onclick="abrirSobre()">Sobre o autor</button>
@@ -3681,6 +3716,21 @@ abbr.gloss:hover::before {
       <button class="overlay-close" onclick="fecharLogistica()" aria-label="Fechar">✕</button>
     </div>
     <div class="overlay-body" id="logistica-body"><!-- JS --></div>
+  </div>
+</div>
+
+<!-- LINKS ÚTEIS OVERLAY -->
+<div id="links-overlay">
+  <div class="overlay-backdrop" onclick="fecharLinks()"></div>
+  <div class="overlay-panel">
+    <div class="overlay-header">
+      <div>
+        <div class="overlay-title">Links Úteis</div>
+        <div class="overlay-sub">Referências clínicas · IA · Especialidades da turma</div>
+      </div>
+      <button class="overlay-close" onclick="fecharLinks()" aria-label="Fechar">✕</button>
+    </div>
+    <div class="overlay-body" id="links-body"><!-- JS --></div>
   </div>
 </div>
 
@@ -8627,6 +8677,83 @@ function renderLogistica(){
 </div>`;
 }
 
+
+/* ==============================================================
+   LINKS ÚTEIS — ferramentas de IA + referências por especialidade
+   ============================================================== */
+
+const LINKS_UTEIS = [
+  { cat: '🤖 Ferramentas de IA', items: [
+    { nome: 'Gemini', url: 'https://gemini.google.com', dominio: 'gemini.google.com' },
+    { nome: 'Claude', url: 'https://claude.ai', dominio: 'claude.ai' },
+    { nome: 'ChatGPT', url: 'https://chatgpt.com', dominio: 'chatgpt.com' },
+    { nome: '🧩 Explorar GPTs', url: 'https://chatgpt.com/gpts', dominio: 'chatgpt.com/gpts' },
+    { nome: 'NotebookLM', url: 'https://notebooklm.google.com', dominio: 'notebooklm.google.com' },
+  ]},
+  { cat: '🧒 Pediatria · Niraimathy', items: [
+    { nome: 'SBP — Sociedade Brasileira de Pediatria', url: 'https://www.sbp.com.br', dominio: 'sbp.com.br' },
+    { nome: 'AAP — American Academy of Pediatrics', url: 'https://www.aap.org', dominio: 'aap.org' },
+    { nome: 'ILCOR — Consensus em Ressuscitação', url: 'https://ilcor.org', dominio: 'ilcor.org' },
+    { nome: 'PubMed', url: 'https://pubmed.ncbi.nlm.nih.gov', dominio: 'pubmed.ncbi.nlm.nih.gov' },
+    { nome: 'Cochrane Library', url: 'https://www.cochranelibrary.com', dominio: 'cochranelibrary.com' },
+  ]},
+  { cat: '🩺 Ginecologia e Obstetrícia · Ademir Reberti', items: [
+    { nome: 'FEBRASGO', url: 'https://www.febrasgo.org.br', dominio: 'febrasgo.org.br' },
+    { nome: 'ACOG', url: 'https://www.acog.org', dominio: 'acog.org' },
+    { nome: 'RCOG', url: 'https://www.rcog.org.uk', dominio: 'rcog.org.uk' },
+  ]},
+  { cat: '🚑 Clínica Médica e Emergência · Pedro Stumm', items: [
+    { nome: 'SBCM — Soc. Brasileira de Clínica Médica', url: 'https://sbcm.org.br', dominio: 'sbcm.org.br' },
+    { nome: 'ACEP — American College of Emergency Physicians', url: 'https://www.acep.org', dominio: 'acep.org' },
+    { nome: 'AHA — ACLS / Emergências Cardiovasculares', url: 'https://cpr.heart.org', dominio: 'cpr.heart.org' },
+  ]},
+  { cat: '🫁 Pneumologia Pediátrica · Anna Sofia', items: [
+    { nome: 'GINA — Global Initiative for Asthma', url: 'https://ginasthma.org', dominio: 'ginasthma.org' },
+    { nome: 'SBPT — Soc. Brasileira de Pneumologia', url: 'https://www.sbpt.org.br', dominio: 'sbpt.org.br' },
+    { nome: 'NHLBI / NAEPP (EUA)', url: 'https://www.nhlbi.nih.gov', dominio: 'nhlbi.nih.gov' },
+  ]},
+  { cat: '🩹 Clínico Geral · Lucas Dambrós', items: [
+    { nome: 'SBMFC — Soc. Bras. de Medicina de Família e Comunidade', url: 'https://www.sbmfc.org.br', dominio: 'sbmfc.org.br' },
+    { nome: 'USPSTF — Rastreamentos Baseados em Evidência', url: 'https://www.uspreventiveservicestaskforce.org', dominio: 'uspreventiveservicestaskforce.org' },
+    { nome: 'SBC — Sociedade Brasileira de Cardiologia', url: 'https://www.cardiol.br', dominio: 'cardiol.br' },
+  ]},
+  { cat: '📋 Gestão e Qualidade em Saúde · Pricila', items: [
+    { nome: 'ANVISA — Segurança do Paciente', url: 'https://www.gov.br/anvisa/pt-br', dominio: 'gov.br/anvisa' },
+    { nome: 'IHI — Institute for Healthcare Improvement', url: 'https://www.ihi.org', dominio: 'ihi.org' },
+    { nome: 'ONA — Organização Nacional de Acreditação', url: 'https://www.ona.org.br', dominio: 'ona.org.br' },
+  ]},
+  { cat: '🏃 Fisioterapia Intensiva · Dagmar', items: [
+    { nome: 'ASSOBRAFIR', url: 'https://www.assobrafir.com.br', dominio: 'assobrafir.com.br' },
+    { nome: 'COFFITO', url: 'https://www.coffito.gov.br', dominio: 'coffito.gov.br' },
+    { nome: 'ESICM — European Society of Intensive Care Medicine', url: 'https://www.esicm.org', dominio: 'esicm.org' },
+  ]},
+  { cat: '🩻 Radiologia e Diagnóstico por Imagem · Thiago Ferrão', items: [
+    { nome: 'CBR — Colégio Brasileiro de Radiologia', url: 'https://cbr.org.br', dominio: 'cbr.org.br' },
+    { nome: 'ACR — BI-RADS / Lung-RADS / TI-RADS', url: 'https://www.acr.org', dominio: 'acr.org' },
+    { nome: 'RSNA', url: 'https://www.rsna.org', dominio: 'rsna.org' },
+  ]},
+  { cat: '🧬 AIMED · InovaMed', items: [
+    { nome: 'InovaMed', url: 'https://inovamed.pro', dominio: 'inovamed.pro' },
+  ]},
+  { cat: '💬 Comunidade', items: [
+    { nome: 'Grupo do WhatsApp do curso', url: 'https://chat.whatsapp.com/G7O9JtBTWURFm7CVL7GRqs?s=cl&p=a&ilr=0', dominio: 'entrar' },
+  ]},
+];
+
+function showLinks(){document.getElementById('links-overlay').classList.add('open');document.getElementById('links-body').innerHTML=renderLinks();}
+function fecharLinks(){document.getElementById('links-overlay').classList.remove('open');}
+
+function renderLinks(){
+  return LINKS_UTEIS.map(grupo => `
+    <div class="links-group">
+      <div class="links-cat-title">${grupo.cat}</div>
+      <div class="links-items">
+        ${grupo.items.map(it => `<a class="links-card" href="${it.url}" target="_blank" rel="noopener"><span class="links-name">${it.nome}</span><span class="links-domain">${it.dominio} ↗</span></a>`).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
 /* ============================================================
    MODAL "SOBRE" — focus trap + restauração de foco
    Mantém navegação por teclado presa dentro do modal enquanto
@@ -8701,6 +8828,8 @@ document.addEventListener('keydown', (e) => {
     if (overlay && overlay.classList.contains('open')) fecharSobre();
     const logOverlay = document.getElementById('logistica-overlay');
     if (logOverlay && logOverlay.classList.contains('open')) fecharLogistica();
+    const linksOverlay = document.getElementById('links-overlay');
+    if (linksOverlay && linksOverlay.classList.contains('open')) fecharLinks();
   }
 });
 
