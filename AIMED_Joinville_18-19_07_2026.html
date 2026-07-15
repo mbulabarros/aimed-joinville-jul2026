@@ -9025,7 +9025,7 @@ function formatarMensagem(tab){
   const d = coletarPainel(tab);
   const dt = new Date().toLocaleDateString('pt-BR');
   let msg = `*AIMED · ${EDITION_AVAL.label} · ${ETAPA_LABELS[tab]}*\n_Enviado em ${dt}_\n`;
-  msg += `Apelido: *${d.apelido||'(não preenchido)'}*\n`;
+  msg += `*1. Apelido de pareamento:* ${d.apelido||'(não preenchido)'}\n`;
   msg += `Especialidade: *${d.especialidade||'(não preenchida)'}*\n\n`;
   if(tab==='t0'){
     msg += `*2. Frequência de uso atual:* ${d.freq||'—'}\n`;
