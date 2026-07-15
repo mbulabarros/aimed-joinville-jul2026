@@ -3646,6 +3646,50 @@ abbr.gloss:hover::before {
 .links-card:hover { border-color: var(--gold-dim); }
 .links-name { color: var(--gray-300); font-size: 0.9rem; }
 .links-domain { color: var(--gray-500); font-size: 0.72rem; white-space: nowrap; margin-left: 12px; }
+
+/* ==============================================================
+   AVALIAÇÃO · PESQUISA OVERLAY
+   ============================================================== */
+#avaliacao-overlay {
+  position: fixed; inset: 0; z-index: 200; display: none;
+  align-items: flex-start; justify-content: flex-end;
+}
+#avaliacao-overlay.open { display: flex; }
+
+.eval-tabs { display: flex; gap: 6px; padding: 14px 28px 0; border-bottom: 1px solid rgba(255,255,255,0.06); flex-wrap: wrap; }
+.eval-tab { background: transparent; border: 1px solid rgba(255,255,255,0.06); color: var(--gray-300); padding: 8px 14px; border-radius: 8px 8px 0 0; cursor: pointer; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.04em; transition: all 0.2s; }
+.eval-tab:hover { color: var(--gray-100); border-color: var(--border); }
+.eval-tab.active { background: var(--navy-light); color: var(--gold); border-color: var(--border); border-bottom-color: var(--navy-light); }
+.eval-pane { display: none; padding: 24px 32px 40px; }
+.eval-pane.active { display: block; }
+.eval-pane h3 { font-family: 'Playfair Display', serif; font-style: italic; color: var(--gold); margin-bottom: 6px; font-size: 1.35rem; }
+.eval-pane .eval-context { color: var(--gray-300); font-size: 0.82rem; margin-bottom: 22px; line-height: 1.5; }
+.eval-item { margin-bottom: 22px; padding: 16px; background: rgba(255,255,255,0.02); border-radius: var(--radius); border: 1px solid rgba(255,255,255,0.06); }
+.eval-item-label { display: block; font-size: 0.82rem; font-weight: 600; color: var(--gray-100); margin-bottom: 10px; line-height: 1.4; }
+.eval-item-hint { display: block; font-size: 0.7rem; color: var(--gray-500); margin-top: -4px; margin-bottom: 8px; font-style: italic; }
+.eval-input, .eval-textarea { width: 100%; background: var(--navy); color: var(--gray-100); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; padding: 10px 12px; font-family: inherit; font-size: 0.84rem; transition: border-color 0.2s; }
+.eval-input:focus, .eval-textarea:focus { outline: none; border-color: var(--gold); }
+.eval-textarea { resize: vertical; min-height: 60px; }
+.eval-options { display: flex; flex-direction: column; gap: 6px; }
+.eval-options.horizontal { flex-direction: row; flex-wrap: wrap; gap: 8px; }
+.eval-option { display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: var(--navy); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; cursor: pointer; transition: all 0.2s; font-size: 0.8rem; }
+.eval-option:hover { border-color: var(--border); }
+.eval-option input { accent-color: var(--gold); cursor: pointer; }
+.eval-likert { display: flex; gap: 6px; justify-content: space-between; align-items: stretch; }
+.eval-likert .eval-option { flex: 1; flex-direction: column; text-align: center; padding: 10px 4px; gap: 4px; }
+.eval-likert .likert-num { font-size: 1.1rem; font-weight: 700; color: var(--gray-300); }
+.eval-likert input:checked ~ .likert-num { color: var(--gold); }
+.eval-likert-scale { display: flex; justify-content: space-between; font-size: 0.65rem; color: var(--gray-500); margin-top: 6px; padding: 0 4px; }
+.eval-privacy { background: rgba(201,168,76,0.08); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; margin-bottom: 20px; font-size: 0.76rem; color: var(--gray-300); line-height: 1.5; }
+.eval-privacy strong { color: var(--gold); }
+.eval-actions { display: flex; gap: 10px; margin-top: 28px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.06); flex-wrap: wrap; }
+.eval-btn { padding: 12px 18px; border-radius: 10px; border: none; cursor: pointer; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.03em; transition: all 0.2s; font-family: inherit; }
+.eval-btn-wa { background: #25d366; color: #fff; flex: 1; min-width: 200px; }
+.eval-btn-wa:hover { background: #1ebd5b; transform: translateY(-1px); }
+.eval-btn-copy { background: var(--navy-light); color: var(--gray-100); border: 1px solid var(--border); }
+.eval-btn-copy:hover { color: var(--gold); }
+.eval-btn-clear { background: transparent; color: var(--gray-500); border: 1px solid rgba(255,255,255,0.06); }
+.eval-btn-clear:hover { color: var(--coral); border-color: var(--coral); }
 </style>
 </head>
 <body>
@@ -3673,6 +3717,11 @@ abbr.gloss:hover::before {
         <button class="biblioteca-btn" id="linksBtn" onclick="showLinks()">
       <span class="biblioteca-icon">🔗</span>
       <span class="biblioteca-label">Links Úteis</span>
+      <span class="biblioteca-arrow">→</span>
+    </button>
+    <button class="biblioteca-btn" id="avaliacaoBtn" onclick="showAvaliacao()">
+      <span class="biblioteca-icon">📊</span>
+      <span class="biblioteca-label">Avaliação · Pesquisa</span>
       <span class="biblioteca-arrow">→</span>
     </button>
 <nav class="trail" id="trail">
@@ -3731,6 +3780,25 @@ abbr.gloss:hover::before {
       <button class="overlay-close" onclick="fecharLinks()" aria-label="Fechar">✕</button>
     </div>
     <div class="overlay-body" id="links-body"><!-- JS --></div>
+  </div>
+</div>
+
+<!-- AVALIAÇÃO · PESQUISA OVERLAY -->
+<div id="avaliacao-overlay">
+  <div class="overlay-backdrop" onclick="fecharAvaliacao()"></div>
+  <div class="overlay-panel">
+    <div class="overlay-header">
+      <div>
+        <div class="overlay-title">Avaliação · Pesquisa</div>
+        <div class="overlay-sub">Estudo quasi-experimental pré-pós · 2 momentos (T0/T1)</div>
+      </div>
+      <button class="overlay-close" onclick="fecharAvaliacao()" aria-label="Fechar">✕</button>
+    </div>
+    <div class="eval-tabs" id="eval-tabs">
+      <button class="eval-tab active" data-pane="t0" onclick="switchEvalTab('t0')">T0 · Pré-curso</button>
+      <button class="eval-tab" data-pane="t1" onclick="switchEvalTab('t1')">T1 · Pós-imediato</button>
+    </div>
+    <div class="overlay-body" id="avaliacao-body"><!-- JS preenche --></div>
   </div>
 </div>
 
@@ -8754,6 +8822,262 @@ function renderLinks(){
   `).join('');
 }
 
+
+/* ==============================================================
+   AVALIAÇÃO · PESQUISA — estudo quasi-experimental pré-pós (T0/T1)
+   ============================================================== */
+
+const EDITION_AVAL = {
+  label: 'AIMED Joinville · Julho 2026',
+  especialidadesOpts: ['Pediatria','Ginecologia e Obstetrícia','Clínica Médica e Emergência','Pneumologia Pediátrica','Clínico Geral','Gestão da Qualidade em Saúde','Fisioterapia Intensiva','Radiologia','Outra'],
+};
+
+const EVAL_KEYS = { t0: 'aimed_jul_eval_t0', t1: 'aimed_jul_eval_t1' };
+
+function evalLoad(k){ try{ return JSON.parse(localStorage.getItem(EVAL_KEYS[k])||'{}'); } catch(e){ return {}; } }
+function evalSave(k,data){ try{ localStorage.setItem(EVAL_KEYS[k], JSON.stringify(data)); return true; } catch(e){ return false; } }
+function evalClear(k){ if(confirm('Apagar tudo desta etapa? Não há como desfazer.')){ localStorage.removeItem(EVAL_KEYS[k]); renderAvaliacao(currentEvalTab); showToast('Etapa apagada'); } }
+
+let currentEvalTab = 't0';
+let evalSaveTimer = null;
+
+function renderEspecialidadeItem(saved){
+  const opts = EDITION_AVAL.especialidadesOpts.map(o => ({v:o, label:o}));
+  return `<div class="eval-item">
+    <label class="eval-item-label">0. Sua especialidade / formação atual</label>
+    <span class="eval-item-hint">Item de estratificação · usado para análise por subgrupo, não te identifica.</span>
+    ${radio('especialidade', opts, saved)}
+  </div>`;
+}
+
+function likert(name, saved, scale){
+  scale = scale || ['Discordo totalmente','','Neutro','','Concordo totalmente'];
+  let html = '<div class="eval-likert">';
+  for(let i=1;i<=5;i++){
+    const checked = saved===String(i) ? 'checked' : '';
+    html += `<label class="eval-option"><input type="radio" name="${name}" value="${i}" ${checked} onchange="evalAutoSave()"><span class="likert-num">${i}</span></label>`;
+  }
+  html += `</div><div class="eval-likert-scale"><span>${scale[0]}</span><span>${scale[4]}</span></div>`;
+  return html;
+}
+function radio(name, opts, saved){
+  return '<div class="eval-options">' + opts.map(o => {
+    const v = typeof o === 'string' ? o : o.v;
+    const lbl = typeof o === 'string' ? o : o.label;
+    const checked = saved===v ? 'checked' : '';
+    return `<label class="eval-option"><input type="radio" name="${name}" value="${v}" ${checked} onchange="evalAutoSave()"><span>${lbl}</span></label>`;
+  }).join('') + '</div>';
+}
+function checkboxes(name, opts, savedArr){
+  savedArr = Array.isArray(savedArr) ? savedArr : [];
+  return '<div class="eval-options">' + opts.map(o => {
+    const checked = savedArr.includes(o) ? 'checked' : '';
+    return `<label class="eval-option"><input type="checkbox" name="${name}" value="${o}" ${checked} onchange="evalAutoSave()"><span>${o}</span></label>`;
+  }).join('') + '</div>';
+}
+
+function renderT0(){
+  const s = evalLoad('t0');
+  return `
+<div class="eval-pane active" data-pane="t0" id="pane-t0">
+  <h3>T0 · Antes do Curso</h3>
+  <p class="eval-context">Responda <strong>antes do dia 18/07</strong>. São 10 itens, ~5 minutos. Mede sua linha de base para comparação posterior.</p>
+  <div class="eval-privacy">
+    <strong>Como protegemos sua privacidade:</strong> escolha um <strong>apelido de pareamento</strong> que só você saiba — por exemplo, suas iniciais + dois últimos dígitos do telefone (ex: <code style="color:var(--gold)">ML47</code>). Use exatamente o mesmo apelido nas duas fases. Assim conseguimos parear pré e pós sem armazenar dados identificáveis estruturados.
+  </div>
+  ${renderEspecialidadeItem(s.especialidade)}
+  <div class="eval-item">
+    <label class="eval-item-label">1. Seu apelido de pareamento</label>
+    <span class="eval-item-hint">Memorize ou anote — você vai usar igual no T1.</span>
+    <input type="text" class="eval-input" name="apelido" value="${s.apelido||''}" placeholder="Ex: ML47" oninput="evalAutoSave()">
+  </div>
+  <div class="eval-item">
+    <label class="eval-item-label">2. Frequência atual de uso de IA na sua prática clínica</label>
+    ${radio('freq',['Nunca','1–2x por semana','3–5x por semana','Quase diário'],s.freq)}
+  </div>
+  <div class="eval-item">
+    <label class="eval-item-label">3. Quais IAs você já usa hoje? <span style="color:var(--gray-500);font-weight:400">(marque todas)</span></label>
+    ${checkboxes('ias',['Gemini','Claude','ChatGPT','NotebookLM','Outras','Nenhuma'],s.ias)}
+  </div>
+  <div class="eval-item">
+    <label class="eval-item-label">4. "Sinto-me capaz de escrever um prompt eficaz para uma dúvida clínica."</label>
+    ${likert('autoeficacia',s.autoeficacia)}
+  </div>
+  <div class="eval-item">
+    <label class="eval-item-label">5. "Confio no resultado de uma IA para apoiar minha decisão clínica."</label>
+    ${likert('confianca',s.confianca)}
+  </div>
+  <div class="eval-item">
+    <label class="eval-item-label">6. Com que frequência você checa a fonte de uma resposta da IA?</label>
+    ${radio('checa',['Nunca','Raramente','Às vezes','Sempre'],s.checa)}
+  </div>
+  <div class="eval-item">
+    <label class="eval-item-label">7. Você já percebeu uma alucinação clara da IA em conteúdo médico?</label>
+    ${radio('alucinacao',['Sim, claramente','Talvez, mas não tenho certeza','Nunca percebi'],s.alucinacao)}
+  </div>
+  <div class="eval-item">
+    <label class="eval-item-label">8. Conhece a Resolução CFM 2.454/2026 sobre uso de IA na medicina?</label>
+    ${radio('cfm',['Conheço bem','Superficialmente','Não conheço'],s.cfm)}
+  </div>
+  <div class="eval-item">
+    <label class="eval-item-label">9. Seu maior medo sobre uso de IA na sua prática? <span style="color:var(--gray-500);font-weight:400">(uma frase)</span></label>
+    <textarea class="eval-textarea" name="medo" oninput="evalAutoSave()">${s.medo||''}</textarea>
+  </div>
+  <div class="eval-item">
+    <label class="eval-item-label">10. Sua maior expectativa para o curso? <span style="color:var(--gray-500);font-weight:400">(uma frase)</span></label>
+    <textarea class="eval-textarea" name="expectativa" oninput="evalAutoSave()">${s.expectativa||''}</textarea>
+  </div>
+  <div class="eval-actions">
+    <button class="eval-btn eval-btn-wa" onclick="enviarWhatsApp('t0')">📱 Enviar pelo grupo WhatsApp</button>
+    <button class="eval-btn eval-btn-copy" onclick="copiarTexto('t0')">📋 Copiar texto</button>
+    <button class="eval-btn eval-btn-clear" onclick="evalClear('t0')">Limpar</button>
+  </div>
+</div>`;
+}
+
+function renderT1(){
+  const s = evalLoad('t1');
+  return `
+<div class="eval-pane active" data-pane="t1" id="pane-t1">
+  <h3>T1 · Logo Após o Curso</h3>
+  <p class="eval-context">Responda <strong>no domingo 19/07, à noite</strong>. Use o <strong>mesmo apelido</strong> do T0. Mede o impacto imediato.</p>
+  ${renderEspecialidadeItem(s.especialidade)}
+  <div class="eval-item">
+    <label class="eval-item-label">1. Apelido de pareamento <span style="color:var(--gray-500);font-weight:400">(igual ao do T0)</span></label>
+    <input type="text" class="eval-input" name="apelido" value="${s.apelido||''}" placeholder="Ex: ML47" oninput="evalAutoSave()">
+  </div>
+  <div class="eval-item">
+    <label class="eval-item-label">2. Hoje, frequência prevista de uso de IA na sua prática</label>
+    ${radio('freq',['Nunca','1–2x por semana','3–5x por semana','Quase diário'],s.freq)}
+  </div>
+  <div class="eval-item">
+    <label class="eval-item-label">3. "Sinto-me capaz de escrever um prompt eficaz para uma dúvida clínica."</label>
+    ${likert('autoeficacia',s.autoeficacia)}
+  </div>
+  <div class="eval-item">
+    <label class="eval-item-label">4. "Confio no resultado de uma IA para apoiar minha decisão clínica."</label>
+    ${likert('confianca',s.confianca)}
+  </div>
+  <div class="eval-item">
+    <label class="eval-item-label">5. Frequência prevista de checagem da fonte das respostas</label>
+    ${radio('checa',['Nunca','Raramente','Às vezes','Sempre'],s.checa)}
+  </div>
+  <div class="eval-item">
+    <label class="eval-item-label">6. O curso atendeu sua expectativa?</label>
+    ${likert('expectativa_atendida',s.expectativa_atendida,['Muito abaixo','','Atendeu','','Muito acima'])}
+  </div>
+  <div class="eval-item">
+    <label class="eval-item-label">7. Probabilidade de recomendar o curso a uma colega <span style="color:var(--gray-500);font-weight:400">(NPS · 0 a 10)</span></label>
+    <div class="eval-options horizontal">
+      ${[0,1,2,3,4,5,6,7,8,9,10].map(n => `<label class="eval-option"><input type="radio" name="nps" value="${n}" ${s.nps===String(n)?'checked':''} onchange="evalAutoSave()"><span>${n}</span></label>`).join('')}
+    </div>
+  </div>
+  <div class="eval-item">
+    <label class="eval-item-label">8. O que vai aplicar PRIMEIRO, ainda esta semana?</label>
+    <textarea class="eval-textarea" name="aplicar_primeiro" oninput="evalAutoSave()">${s.aplicar_primeiro||''}</textarea>
+  </div>
+  <div class="eval-item">
+    <label class="eval-item-label">9. Comentário livre <span style="color:var(--gray-500);font-weight:400">(opcional)</span></label>
+    <textarea class="eval-textarea" name="comentario" oninput="evalAutoSave()">${s.comentario||''}</textarea>
+  </div>
+  <div class="eval-actions">
+    <button class="eval-btn eval-btn-wa" onclick="enviarWhatsApp('t1')">📱 Enviar pelo grupo WhatsApp</button>
+    <button class="eval-btn eval-btn-copy" onclick="copiarTexto('t1')">📋 Copiar texto</button>
+    <button class="eval-btn eval-btn-clear" onclick="evalClear('t1')">Limpar</button>
+  </div>
+</div>`;
+}
+
+function renderAvaliacao(tab){
+  tab = tab || 't0';
+  currentEvalTab = tab;
+  const body = document.getElementById('avaliacao-body');
+  if(!body) return;
+  let html = '';
+  if(tab==='t0') html = renderT0();
+  else if(tab==='t1') html = renderT1();
+  body.innerHTML = html;
+  document.querySelectorAll('.eval-tab').forEach(b => b.classList.toggle('active', b.dataset.pane===tab));
+}
+function switchEvalTab(t){ evalSaveNow(currentEvalTab); renderAvaliacao(t); }
+
+function coletarPainel(tab){
+  const pane = document.getElementById('pane-'+tab);
+  if(!pane) return {};
+  const data = {};
+  pane.querySelectorAll('input[type="text"], textarea').forEach(el => { if(el.name) data[el.name] = el.value.trim(); });
+  pane.querySelectorAll('input[type="radio"]:checked').forEach(el => { if(el.name) data[el.name] = el.value; });
+  const groups = {};
+  pane.querySelectorAll('input[type="checkbox"]:checked').forEach(el => {
+    if(!el.name) return;
+    groups[el.name] = groups[el.name] || [];
+    groups[el.name].push(el.value);
+  });
+  Object.assign(data, groups);
+  return data;
+}
+function evalSaveNow(tab){ tab = tab || currentEvalTab; const data = coletarPainel(tab); evalSave(tab, data); }
+function evalAutoSave(){ clearTimeout(evalSaveTimer); evalSaveTimer = setTimeout(function(){ evalSaveNow(currentEvalTab); }, 400); }
+
+const ETAPA_LABELS = { t0: 'T0 · Pré-curso', t1: 'T1 · Pós-imediato' };
+
+function formatarMensagem(tab){
+  const d = coletarPainel(tab);
+  const dt = new Date().toLocaleDateString('pt-BR');
+  let msg = `*AIMED · ${EDITION_AVAL.label} · ${ETAPA_LABELS[tab]}*\n_Enviado em ${dt}_\n`;
+  msg += `Apelido: *${d.apelido||'(não preenchido)'}*\n`;
+  msg += `Especialidade: *${d.especialidade||'(não preenchida)'}*\n\n`;
+  if(tab==='t0'){
+    msg += `*2. Frequência de uso atual:* ${d.freq||'—'}\n`;
+    msg += `*3. IAs usadas:* ${(d.ias||[]).join(', ')||'—'}\n`;
+    msg += `*4. Autoeficácia (1-5):* ${d.autoeficacia||'—'}\n`;
+    msg += `*5. Confiança (1-5):* ${d.confianca||'—'}\n`;
+    msg += `*6. Checa fonte:* ${d.checa||'—'}\n`;
+    msg += `*7. Já viu alucinação:* ${d.alucinacao||'—'}\n`;
+    msg += `*8. CFM 2.454/2026:* ${d.cfm||'—'}\n`;
+    msg += `*9. Maior medo:* ${d.medo||'—'}\n`;
+    msg += `*10. Maior expectativa:* ${d.expectativa||'—'}`;
+  } else if(tab==='t1'){
+    msg += `*2. Frequência prevista:* ${d.freq||'—'}\n`;
+    msg += `*3. Autoeficácia (1-5):* ${d.autoeficacia||'—'}\n`;
+    msg += `*4. Confiança (1-5):* ${d.confianca||'—'}\n`;
+    msg += `*5. Checa fonte (prev.):* ${d.checa||'—'}\n`;
+    msg += `*6. Expectativa atendida (1-5):* ${d.expectativa_atendida||'—'}\n`;
+    msg += `*7. NPS (0-10):* ${d.nps||'—'}\n`;
+    msg += `*8. Vai aplicar primeiro:* ${d.aplicar_primeiro||'—'}\n`;
+    msg += `*9. Comentário:* ${d.comentario||'—'}`;
+  }
+  return msg;
+}
+
+function enviarWhatsApp(tab){
+  evalSaveNow(tab);
+  const msg = formatarMensagem(tab);
+  const url = 'https://wa.me/?text='+encodeURIComponent(msg);
+  window.open(url,'_blank','noopener');
+  showToast('Abrindo WhatsApp — escolha o grupo AIMED Joinville');
+}
+function copiarTexto(tab){
+  evalSaveNow(tab);
+  const msg = formatarMensagem(tab);
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(msg).then(function(){ showToast('Texto copiado'); });
+  } else {
+    const ta = document.createElement('textarea'); ta.value = msg; document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); showToast('Texto copiado'); } catch(e){ showToast('Falhou — copie manualmente'); }
+    document.body.removeChild(ta);
+  }
+}
+
+function showAvaliacao(){
+  document.getElementById('avaliacao-overlay').classList.add('open');
+  renderAvaliacao(currentEvalTab);
+}
+function fecharAvaliacao(){
+  evalSaveNow(currentEvalTab);
+  document.getElementById('avaliacao-overlay').classList.remove('open');
+}
+
 /* ============================================================
    MODAL "SOBRE" — focus trap + restauração de foco
    Mantém navegação por teclado presa dentro do modal enquanto
@@ -8830,6 +9154,8 @@ document.addEventListener('keydown', (e) => {
     if (logOverlay && logOverlay.classList.contains('open')) fecharLogistica();
     const linksOverlay = document.getElementById('links-overlay');
     if (linksOverlay && linksOverlay.classList.contains('open')) fecharLinks();
+    const avalOverlay = document.getElementById('avaliacao-overlay');
+    if (avalOverlay && avalOverlay.classList.contains('open')) fecharAvaliacao();
   }
 });
 
