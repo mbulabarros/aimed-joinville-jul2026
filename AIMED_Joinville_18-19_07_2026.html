@@ -8500,10 +8500,10 @@ function renderKitOrquestracao(kit) {
 
     // Botão da IA principal do passo (destaque primário) + copiar + alternativas
     const botaoPrincipal = step.platform === 'chatgpt'
-      ? `<button class="action-btn primary" onclick="openAI('chatgpt', '${promptId}')"><span class="icon">◔</span> Abrir no ChatGPT</button>`
+      ? `<a class="action-btn primary" href="https://chatgpt.com/?q=${encodeURIComponent(step.prompt)}" target="_blank" rel="noopener noreferrer"><span class="icon">◔</span> Abrir no ChatGPT</a>`
       : step.platform === 'claude'
-        ? `<button class="action-btn primary" onclick="openAI('claude', '${promptId}')"><span class="icon">◑</span> Abrir no Claude</button>`
-        : `<button class="action-btn primary" onclick="openAI('gemini', '${promptId}')"><span class="icon">◕</span> Abrir no Gemini</button>`;
+        ? `<a class="action-btn primary" href="https://claude.ai/new?q=${encodeURIComponent(step.prompt)}" target="_blank" rel="noopener noreferrer"><span class="icon">◑</span> Abrir no Claude</a>`
+        : `<a class="action-btn primary" href="javascript:void(0)" onclick="abrirGeminiModal('${promptId}');return false;"><span class="icon">◕</span> Abrir no Gemini</a>`;
 
     return `
       <section class="kit-step ${step.platform}">
