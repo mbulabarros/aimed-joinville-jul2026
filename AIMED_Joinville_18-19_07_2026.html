@@ -4751,14 +4751,16 @@ const PROGRAMA = [
             </div>
           </div>
 
-          <h3>Os comandos deste módulo</h3>
-          <p>Todos seguem o mesmo formato AIMED e têm os mesmos quatro botões — copiar, ChatGPT, Claude e Gemini. Abaixo estão os cenários 02 e 03, mais um comando extra para radiologia. O <strong>Cenário 01 — laudo ditado</strong> está na área de prática, no fim deste módulo, com os três níveis de profundidade.</p>
+          <h3>Os prompts deste módulo</h3>
+          <p>Os quatro seguem o mesmo formato AIMED e têm os mesmos quatro botões — copiar, ChatGPT, Claude e Gemini. O <strong>Cenário 01</strong> traz ainda três níveis de profundidade: comece pelo Nível 2, que já sai pronto para assinar.</p>
+
+<!--PRACTICE-->
 
           <section class="practice-section">
             <div class="practice-header">
               <div>
                 <div class="practice-label">Prática · Demonstração ao vivo</div>
-                <div class="practice-title">Cenário 02 · Comando para discussão com colega virtual</div>
+                <div class="practice-title">Cenário 02 · Prompt para discussão com colega virtual</div>
               </div>
             </div>
             <div class="aimed-legend">
@@ -4802,7 +4804,7 @@ Ao final:
             <div class="practice-header">
               <div>
                 <div class="practice-label">Prática · Demonstração ao vivo</div>
-                <div class="practice-title">Cenário 03 · Comando para análise pós-consulta</div>
+                <div class="practice-title">Cenário 03 · Prompt para análise pós-consulta</div>
               </div>
             </div>
             <div class="aimed-legend">
@@ -4855,7 +4857,7 @@ Ao final, gere uma linha pronta para colar no prontuário.</span>
             <div class="practice-header">
               <div>
                 <div class="practice-label">Prática · Feito para o Thiago · Radiologia</div>
-                <div class="practice-title">Bônus · Comando para laudo radiológico estruturado</div>
+                <div class="practice-title">Bônus · Prompt para laudo radiológico estruturado</div>
               </div>
             </div>
             <div class="aimed-legend">
@@ -4911,7 +4913,7 @@ Ao final, liste o que ficou ambíguo no meu ditado, marcado como [confirmar].</s
           </div>
         `,
         prompts: {
-          titulo: 'Cenário 01 · Comando para laudo ditado por voz',
+          titulo: 'Cenário 01 · Prompt para laudo ditado por voz',
           nivel1: {
             hint: 'Pedido simples — funciona para laudos curtos',
             texto: `Vou ditar um laudo. Transcreva corrigindo gramática e formatando em parágrafos claros. Responda em linguagem médica formal.`
@@ -6483,11 +6485,18 @@ function renderModule(modulo, bloco) {
 
   html += renderAvatar(modulo);
 
+  let corpo = modulo.conteudo || '';
+  let praticaInline = false;
+  if (modulo.prompts && corpo.indexOf('<!--PRACTICE-->') !== -1) {
+    corpo = corpo.replace('<!--PRACTICE-->', renderPractice(modulo.prompts));
+    praticaInline = true;
+  }
+
   if (modulo.conteudo) {
     html += `
       <section class="content-section">
         <div class="section-label">Conteúdo da aula</div>
-        <div class="aula-content">${modulo.conteudo}</div>
+        <div class="aula-content">${corpo}</div>
       </section>
     `;
   } else {
@@ -6502,7 +6511,7 @@ function renderModule(modulo, bloco) {
     `;
   }
 
-  if (modulo.prompts) {
+  if (modulo.prompts && !praticaInline) {
     html += renderPractice(modulo.prompts);
   }
 
