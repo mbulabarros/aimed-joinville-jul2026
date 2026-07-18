@@ -4751,159 +4751,6 @@ const PROGRAMA = [
             </div>
           </div>
 
-          <h3>Os prompts deste módulo</h3>
-          <p>Os quatro seguem o mesmo formato AIMED e têm os mesmos quatro botões — copiar, ChatGPT, Claude e Gemini. O <strong>Cenário 01</strong> traz ainda três níveis de profundidade: comece pelo Nível 2, que já sai pronto para assinar.</p>
-
-<!--PRACTICE-->
-
-          <section class="practice-section">
-            <div class="practice-header">
-              <div>
-                <div class="practice-label">Prática · Demonstração ao vivo</div>
-                <div class="practice-title">Cenário 02 · Prompt para discussão com colega virtual</div>
-              </div>
-            </div>
-            <div class="aimed-legend">
-              <div class="legend-item"><span class="dot ld-a"></span>Assistente</div>
-              <div class="legend-item"><span class="dot ld-i"></span>Informações</div>
-              <div class="legend-item"><span class="dot ld-m"></span>Missão</div>
-              <div class="legend-item"><span class="dot ld-e"></span>Estrutura</div>
-              <div class="legend-item"><span class="dot ld-d"></span>Diretrizes</div>
-            </div>
-            <div class="level-hint">Para usar no Gemini Live ou no GPT Voice — a IA vira um colega sênior que interrompe, pergunta e provoca</div>
-            <div class="prompt-box">
-              <div class="prompt-text" id="promptVozColega"><span class="ai-a">Use meu Perfil Clínico Permanente. Você é um(a) colega sênior da minha especialidade, com 20 anos de plantão. Tom de corredor, sem formalidade acadêmica. Me trate como igual.</span>
-
-<span class="ai-i">Vou discutir um caso com você por voz, em tempo real. Posso trazer informação fora de ordem, hesitar e me corrigir — é conversa de colegas, não apresentação formal. Todos os dados são anonimizados: uso iniciais e idade aproximada.</span>
-
-<span class="ai-m">Durante a minha fala:
-- Se eu disser algo clinicamente preocupante, me interrompa na hora
-- Se faltar um dado crítico para você opinar, pergunte
-- Se o caso for direto, diga logo e não enrole
-
-Ao final:
-1. Repita o caso em 3 linhas para eu confirmar que você entendeu
-2. Diga sua hipótese principal e o porquê
-3. Diga o que você faria nos próximos 30 minutos
-4. Diga o que você NÃO faria e por quê
-5. Aponte 1 ponto cego do meu raciocínio</span>
-
-<span class="ai-e">Responda em tom de conversa — sem markdown, sem bullets. Fale comigo como um colega falaria no corredor.</span>
-
-<span class="ai-d">Não me deixe errar feio: se eu estiver prestes a tomar uma decisão perigosa, me segure antes de eu terminar de falar. Nunca invente dose, protocolo ou referência. A decisão final é minha.</span></div>
-            </div>
-            <div class="prompt-actions">
-              <button class="action-btn primary" onclick="copyPrompt(this, 'promptVozColega')"><span class="icon">⎘</span> Copiar prompt</button>
-              <button class="action-btn" onclick="openAI('chatgpt','promptVozColega')"><span class="icon">◔</span> Abrir no ChatGPT</button>
-              <button class="action-btn" onclick="openAI('claude','promptVozColega')"><span class="icon">◑</span> Abrir no Claude</button>
-              <a class="action-btn" href="javascript:void(0)" onclick="abrirGeminiModal('promptVozColega');return false;"><span class="icon">◕</span> Abrir no Gemini</a>
-            </div>
-          </section>
-
-          <section class="practice-section">
-            <div class="practice-header">
-              <div>
-                <div class="practice-label">Prática · Demonstração ao vivo</div>
-                <div class="practice-title">Cenário 03 · Prompt para análise pós-consulta</div>
-              </div>
-            </div>
-            <div class="aimed-legend">
-              <div class="legend-item"><span class="dot ld-a"></span>Assistente</div>
-              <div class="legend-item"><span class="dot ld-i"></span>Informações</div>
-              <div class="legend-item"><span class="dot ld-m"></span>Missão</div>
-              <div class="legend-item"><span class="dot ld-e"></span>Estrutura</div>
-              <div class="legend-item"><span class="dot ld-d"></span>Diretrizes</div>
-            </div>
-            <div class="level-hint">Grave um áudio de 60 segundos ao sair da consulta — a IA devolve condutas, pendências, retorno e alertas</div>
-            <div class="prompt-box">
-              <div class="prompt-text" id="promptVozPosConsulta"><span class="ai-a">Use meu Perfil Clínico Permanente. Você é assistente de organização clínica pós-atendimento.</span>
-
-<span class="ai-i">Vou gravar um áudio de até 60 segundos resumindo uma consulta que acabei de fazer. Vou falar rápido e desorganizado, do jeito que sai entre um paciente e outro. Dados anonimizados: uso iniciais e idade aproximada.</span>
-
-<span class="ai-m">A partir do meu áudio, extraia e organize:
-1. Resumo do caso em 2 linhas
-2. Condutas definidas (o que foi prescrito ou solicitado)
-3. Pendências (o que ficou em aberto e depende de mim)
-4. Retorno (quando, e com o quê)
-5. Alertas (sinais de gravidade, interações, algo que eu deva revisar)
-
-Se houver algo que exige ação ainda hoje, coloque no topo, em destaque.</span>
-
-<span class="ai-e">Formato:
-
-Caso: [2 linhas]
-
-Condutas: [lista]
-
-Pendências: [lista com responsável e prazo]
-
-Retorno: [quando + o quê]
-
-Alertas: [se houver; se não houver, escreva "sem alertas"]
-
-Ao final, gere uma linha pronta para colar no prontuário.</span>
-
-<span class="ai-d">Não invente conduta que eu não disse. Se algo ficou ambíguo no áudio, marque como [confirmar] em vez de deduzir. Nunca registre nome completo, CPF ou número de prontuário — se eu falar, substitua por iniciais.</span></div>
-            </div>
-            <div class="prompt-actions">
-              <button class="action-btn primary" onclick="copyPrompt(this, 'promptVozPosConsulta')"><span class="icon">⎘</span> Copiar prompt</button>
-              <button class="action-btn" onclick="openAI('chatgpt','promptVozPosConsulta')"><span class="icon">◔</span> Abrir no ChatGPT</button>
-              <button class="action-btn" onclick="openAI('claude','promptVozPosConsulta')"><span class="icon">◑</span> Abrir no Claude</button>
-              <a class="action-btn" href="javascript:void(0)" onclick="abrirGeminiModal('promptVozPosConsulta');return false;"><span class="icon">◕</span> Abrir no Gemini</a>
-            </div>
-          </section>
-
-          <section class="practice-section">
-            <div class="practice-header">
-              <div>
-                <div class="practice-label">Prática · Feito para o Thiago · Radiologia</div>
-                <div class="practice-title">Bônus · Prompt para laudo radiológico estruturado</div>
-              </div>
-            </div>
-            <div class="aimed-legend">
-              <div class="legend-item"><span class="dot ld-a"></span>Assistente</div>
-              <div class="legend-item"><span class="dot ld-i"></span>Informações</div>
-              <div class="legend-item"><span class="dot ld-m"></span>Missão</div>
-              <div class="legend-item"><span class="dot ld-e"></span>Estrutura</div>
-              <div class="legend-item"><span class="dot ld-d"></span>Diretrizes</div>
-            </div>
-            <div class="level-hint">Thiago, este é o seu: dite o exame e receba Técnica, Achados, Impressão diagnóstica e conduta para cada achado incidental</div>
-            <div class="prompt-box">
-              <div class="prompt-text" id="promptVozRadiologia"><span class="ai-a">Use meu Perfil Clínico Permanente. Você é radiologista sênior e assistente de redação de laudo estruturado, com domínio dos sistemas de classificação padronizada (BI-RADS, Lung-RADS, PI-RADS, TI-RADS, LI-RADS) e do português técnico brasileiro.</span>
-
-<span class="ai-i">Vou ditar por voz os achados de um exame de imagem. Vou informar a modalidade e a região (ex.: TC de tórax com contraste), a indicação clínica e os achados na ordem em que eu os vejo — podendo hesitar, voltar atrás e me corrigir. Se houver exame prévio para comparação, eu aviso. Dados anonimizados: uso iniciais e idade aproximada.</span>
-
-<span class="ai-m">Transforme minha fala em laudo estruturado:
-1. Separe o conteúdo clínico das hesitações e correções — use sempre a versão corrigida
-2. Organize em: Técnica, Achados (por estrutura), Impressão diagnóstica, Recomendação
-3. Se houver sistema de classificação aplicável ao exame, sugira a categoria e diga em que critério se baseou
-4. Separe os achados ligados à indicação clínica dos achados incidentais
-5. Para cada achado incidental, proponha conduta explícita — inclusive "não requer seguimento", quando for o caso</span>
-
-<span class="ai-e">Formato:
-
-Técnica: [modalidade, contraste, protocolo]
-
-Achados: [organizados por estrutura]
-
-Impressão diagnóstica: [numerada, do mais para o menos relevante]
-
-Achados incidentais: [cada um com conduta e prazo]
-
-Recomendação: [exame complementar + prazo, ou "sem necessidade de complementação"]
-
-Ao final, liste o que ficou ambíguo no meu ditado, marcado como [confirmar].</span>
-
-<span class="ai-d">Nunca invente medida, densidade, sinal ou categoria que eu não tenha ditado — se faltar, escreva [não informado]. Não conclua malignidade ou benignidade com certeza absoluta: trabalhe em graus de suspeição. Se eu ditar um achado crítico (pneumotórax hipertensivo, TEP central, hemorragia ativa, isquemia intestinal), sinalize no topo antes do laudo. O laudo final e a responsabilidade são minhas.</span></div>
-            </div>
-            <div class="prompt-actions">
-              <button class="action-btn primary" onclick="copyPrompt(this, 'promptVozRadiologia')"><span class="icon">⎘</span> Copiar prompt</button>
-              <button class="action-btn" onclick="openAI('chatgpt','promptVozRadiologia')"><span class="icon">◔</span> Abrir no ChatGPT</button>
-              <button class="action-btn" onclick="openAI('claude','promptVozRadiologia')"><span class="icon">◑</span> Abrir no Claude</button>
-              <a class="action-btn" href="javascript:void(0)" onclick="abrirGeminiModal('promptVozRadiologia');return false;"><span class="icon">◕</span> Abrir no Gemini</a>
-            </div>
-          </section>
-
           <h3>Exercício guiado</h3>
           <p>Cada participante vai fazer <strong>um laudo ditado</strong> ao vivo, no próprio celular, com um caso da sua especialidade. Vamos ver o texto formatado nascer na tela de todo mundo.</p>
 
@@ -4911,7 +4758,64 @@ Ao final, liste o que ficou ambíguo no meu ditado, marcado como [confirmar].</s
             <div class="callout-label">A métrica da aula</div>
             <p>Se ao final dos 30 minutos você não tiver ditado pelo menos <strong>um laudo completo</strong> com sucesso — não saiu deste módulo. Continue até funcionar.</p>
           </div>
+
+          <h3>Os prompts deste módulo</h3>
+          <p>Os quatro seguem o mesmo formato AIMED e têm os mesmos quatro botões — copiar, ChatGPT, Claude e Gemini. O <strong>Cenário 01</strong> traz ainda três níveis de profundidade: comece pelo Nível 2, que já sai pronto para assinar.</p>
+
+<!--PRACTICE-->
+
         `,
+        promptsExtras: [
+          {
+            id: 'colega',
+            titulo: 'Cenário 02 · Prompt para discussão com colega virtual',
+            nivel1: {
+              hint: 'Pedido direto — já tira a IA do modo de explicar para leigo',
+              texto: `Vou te passar um caso clínico por voz. Me escute até o fim e depois me dê sua análise.\n\nResponda em linguagem técnica — sou médico(a), não paciente.`
+            },
+            nivel2: {
+              hint: 'Com papel e estrutura — a IA vira colega e já sabe o que devolver',
+              texto: `<span class="ai-a">Use meu Perfil Clínico Permanente. Você é um(a) colega sênior da minha especialidade. Tom de corredor, sem formalidade acadêmica.</span>\n\n<span class="ai-i">Vou discutir um caso por voz. Posso trazer informação fora de ordem, hesitar e me corrigir — é conversa de colegas, não apresentação formal. Dados anonimizados: uso iniciais e idade aproximada.</span>\n\n<span class="ai-m">Depois que eu terminar de falar:\n1. Confirme em 3 linhas o que você entendeu\n2. Diga os 3 diagnósticos diferenciais mais prováveis\n3. Sugira o próximo passo de investigação</span>\n\n<span class="ai-d">Se eu falar algo que você não entendeu, pergunte antes de responder. Nunca invente dose nem protocolo.</span>`
+            },
+            nivel3: {
+              hint: 'Modo corredor completo — a IA interrompe, questiona e aponta o seu ponto cego',
+              texto: `<span class="ai-a">Use meu Perfil Clínico Permanente. Você é um(a) colega sênior da minha especialidade, com 20 anos de plantão. Tom de corredor, sem formalidade acadêmica. Me trate como igual.</span>\n\n<span class="ai-i">Vou discutir um caso com você por voz, em tempo real. Posso trazer informação fora de ordem, hesitar e me corrigir. Todos os dados são anonimizados: uso iniciais e idade aproximada.</span>\n\n<span class="ai-m">Durante a minha fala:\n- Se eu disser algo clinicamente preocupante, me interrompa na hora\n- Se faltar um dado crítico para você opinar, pergunte\n- Se o caso for direto, diga logo e não enrole\n\nAo final:\n1. Repita o caso em 3 linhas para eu confirmar que você entendeu\n2. Diga sua hipótese principal e o porquê\n3. Diga o que você faria nos próximos 30 minutos\n4. Diga o que você NÃO faria e por quê\n5. Aponte 1 ponto cego do meu raciocínio</span>\n\n<span class="ai-e">Responda em tom de conversa — sem markdown, sem bullets. Fale comigo como um colega falaria no corredor.</span>\n\n<span class="ai-d">Não me deixe errar feio: se eu estiver prestes a tomar uma decisão perigosa, me segure antes de eu terminar de falar. Nunca invente dose, protocolo ou referência. A decisão final é minha.</span>`
+            }
+          },
+          {
+            id: 'posconsulta',
+            titulo: 'Cenário 03 · Prompt para análise pós-consulta',
+            nivel1: {
+              hint: 'Extração simples — resolve a maior parte dos atendimentos de rotina',
+              texto: `Vou gravar um áudio curto resumindo uma consulta que acabei de fazer.\n\nA partir dele, liste: condutas definidas, pendências que dependem de mim, e quando é o retorno.\n\nResponda em linguagem técnica.`
+            },
+            nivel2: {
+              hint: 'Com as cinco seções — nada se perde entre um paciente e outro',
+              texto: `<span class="ai-a">Use meu Perfil Clínico Permanente. Você é assistente de organização clínica pós-atendimento.</span>\n\n<span class="ai-i">Vou gravar um áudio de até 60 segundos resumindo uma consulta. Vou falar rápido e desorganizado, do jeito que sai entre um paciente e outro. Dados anonimizados: uso iniciais e idade aproximada.</span>\n\n<span class="ai-m">A partir do meu áudio, extraia e organize:\n1. Resumo do caso em 2 linhas\n2. Condutas definidas (o que foi prescrito ou solicitado)\n3. Pendências (o que ficou em aberto e depende de mim)\n4. Retorno (quando, e com o quê)\n5. Alertas (sinais de gravidade, interações, algo a revisar)</span>\n\n<span class="ai-e">Formato: um bloco por item, na ordem acima. Ao final, gere uma linha pronta para colar no prontuário.</span>\n\n<span class="ai-d">Não invente conduta que eu não disse. Se algo ficou ambíguo, marque como [confirmar] em vez de deduzir.</span>`
+            },
+            nivel3: {
+              hint: 'Blindado — prioriza o que exige ação hoje, marca ambiguidades e protege dados',
+              texto: `<span class="ai-a">Use meu Perfil Clínico Permanente. Você é assistente de organização clínica pós-atendimento, com rigor de auditoria.</span>\n\n<span class="ai-i">Vou gravar um áudio de até 60 segundos resumindo uma consulta que acabei de fazer. Vou falar rápido e desorganizado, do jeito que sai entre um paciente e outro. Dados anonimizados: uso iniciais e idade aproximada.</span>\n\n<span class="ai-m">A partir do meu áudio, extraia e organize:\n1. Resumo do caso em 2 linhas\n2. Condutas definidas (o que foi prescrito ou solicitado)\n3. Pendências (o que ficou em aberto e depende de mim, com prazo)\n4. Retorno (quando, e com o quê)\n5. Alertas (sinais de gravidade, interações, algo que eu deva revisar)\n\nSe houver algo que exige ação ainda hoje, coloque no topo, em destaque, antes de tudo.</span>\n\n<span class="ai-e">Formato:\n\nAção imediata: [só se houver]\n\nCaso: [2 linhas]\n\nCondutas: [lista]\n\nPendências: [lista com prazo]\n\nRetorno: [quando + o quê]\n\nAlertas: [se não houver, escreva sem alertas]\n\nAo final, gere uma linha pronta para colar no prontuário e uma lista do que ficou como [confirmar].</span>\n\n<span class="ai-d">Não invente conduta, dose ou exame que eu não disse. Se algo ficou ambíguo no áudio, marque como [confirmar] em vez de deduzir. Nunca registre nome completo, CPF ou número de prontuário — se eu falar, substitua por iniciais. Se o que eu descrevi sugerir gravidade que eu possa ter subestimado, diga isso explicitamente no topo.</span>`
+            }
+          },
+          {
+            id: 'radiologia',
+            label: 'Prática · Feito para o Thiago · Radiologia',
+            titulo: 'Bônus · Prompt para laudo radiológico estruturado',
+            nivel1: {
+              hint: 'Ditado direto — organiza o laudo em três seções',
+              texto: `Vou ditar por voz os achados de um exame de imagem.\n\nOrganize em: Técnica, Achados e Impressão diagnóstica. Corrija a gramática e mantenha linguagem técnica de laudo.\n\nNão invente nenhuma medida ou achado que eu não tenha dito.`
+            },
+            nivel2: {
+              hint: 'Laudo estruturado — com classificação padronizada e conduta para achado incidental',
+              texto: `<span class="ai-a">Use meu Perfil Clínico Permanente. Você é radiologista sênior e assistente de redação de laudo estruturado, com domínio dos sistemas de classificação padronizada (BI-RADS, Lung-RADS, PI-RADS, TI-RADS, LI-RADS).</span>\n\n<span class="ai-i">Vou ditar por voz os achados de um exame de imagem. Informo a modalidade, a região e a indicação clínica. Posso hesitar e me corrigir — use sempre a versão corrigida.</span>\n\n<span class="ai-m">Transforme minha fala em laudo estruturado:\n1. Organize em Técnica, Achados, Impressão diagnóstica e Recomendação\n2. Se houver sistema de classificação aplicável, sugira a categoria e o critério que a justifica\n3. Separe os achados ligados à indicação clínica dos achados incidentais\n4. Para cada achado incidental, proponha conduta explícita — inclusive não requer seguimento, quando for o caso</span>\n\n<span class="ai-e">Formato: uma seção por item, na ordem acima. Recomendação sempre com exame e prazo.</span>\n\n<span class="ai-d">Nunca invente medida, densidade ou categoria que eu não tenha ditado — se faltar, escreva [não informado]. Trabalhe em graus de suspeição, não em certeza absoluta.</span>`
+            },
+            nivel3: {
+              hint: 'Padrão-ouro — comparação com exame prévio, grau de suspeição e alerta de achado crítico',
+              texto: `<span class="ai-a">Use meu Perfil Clínico Permanente. Você é radiologista sênior e assistente de redação de laudo estruturado, com domínio dos sistemas de classificação padronizada (BI-RADS, Lung-RADS, PI-RADS, TI-RADS, LI-RADS) e do português técnico brasileiro.</span>\n\n<span class="ai-i">Vou ditar por voz os achados de um exame de imagem. Vou informar a modalidade e a região (ex.: TC de tórax com contraste), a indicação clínica e os achados na ordem em que eu os vejo — podendo hesitar, voltar atrás e me corrigir. Se houver exame prévio para comparação, eu aviso. Dados anonimizados: uso iniciais e idade aproximada.</span>\n\n<span class="ai-m">Transforme minha fala em laudo estruturado:\n1. Separe o conteúdo clínico das hesitações — use sempre a versão corrigida\n2. Organize em Técnica, Achados (por estrutura), Impressão diagnóstica e Recomendação\n3. Se houver sistema de classificação aplicável, sugira a categoria e diga em que critério se baseou\n4. Separe os achados ligados à indicação clínica dos achados incidentais\n5. Para cada achado incidental, proponha conduta explícita — inclusive não requer seguimento\n6. Se eu mencionar exame prévio, compare e diga se houve progressão, estabilidade ou regressão</span>\n\n<span class="ai-e">Formato:\n\nTécnica: [modalidade, contraste, protocolo]\n\nAchados: [organizados por estrutura]\n\nImpressão diagnóstica: [numerada, do mais para o menos relevante]\n\nAchados incidentais: [cada um com conduta e prazo]\n\nComparação com exame prévio: [se aplicável]\n\nRecomendação: [exame complementar + prazo, ou sem necessidade de complementação]\n\nAo final, liste o que ficou ambíguo no meu ditado, marcado como [confirmar].</span>\n\n<span class="ai-d">Nunca invente medida, densidade, sinal ou categoria que eu não tenha ditado — se faltar, escreva [não informado]. Não conclua malignidade ou benignidade com certeza absoluta: trabalhe em graus de suspeição. Se eu ditar um achado crítico (pneumotórax hipertensivo, TEP central, hemorragia ativa, isquemia intestinal), sinalize no topo antes do laudo. O laudo final e a responsabilidade são minhas.</span>`
+            }
+          }
+        ],
         prompts: {
           titulo: 'Cenário 01 · Prompt para laudo ditado por voz',
           nivel1: {
@@ -5817,7 +5721,7 @@ Ao final, liste o que ficou ambíguo no meu ditado, marcado como [confirmar].</s
           <div class="timeline-90">
             <div class="timeline-stage active">
               <div class="timeline-time">14:25 &ndash; 14:38 &middot; 13 min</div>
-              <div class="timeline-title">Fase 1 &mdash; Apreensão do caso</div>
+              <div class="timeline-title">Fase 1 &mdash; Leitura do caso</div>
               <div class="timeline-body">Cada especialidade lê o dossiê em silêncio. Depois, perguntas de esclarecimento ao grupo. O Claude fica aberto no telão registrando as perguntas levantadas.</div>
             </div>
             <div class="timeline-stage">
@@ -5897,7 +5801,7 @@ Ao final, liste o que ficou ambíguo no meu ditado, marcado como [confirmar].</s
           },
           nivel3: {
             hint: 'Comando master \u2014 escriba + consultor + advogado do diabo integrados',
-            texto: `<span class="ai-a">Você atua em três papéis simultâneos: ESCRIBA CLINICO (registra com precisão cada fala relevante), CONSULTOR MULTIDISCIPLINAR (responde quando questionado, com rigor e brevidade), e ADVOGADO DO DIABO INTELECTUALMENTE HONESTO (ao final, constrói o argumento contrário às conclusões do grupo). Sua identidade é profissional e neutra. Você não se alinha com nenhuma especialidade da sala.</span>\n\n<span class="ai-i">Caso clínico:\nGestante de 29 anos, G2P1, pré-natal irregular, 34 semanas, admitida com pré-eclâmpsia grave (PA 178x116, proteinúria 3+, plaquetas 96k, TGO/TGP elevadas). Cesariana de urgência por deterioração do CTG. RN pré-termo com desconforto respiratório progressivo em CPAP, gasometria com acidose respiratória, e achado radiológico incidental sugestivo de malformação congênita das vias aéreas pulmonares não diagnosticada previamente. Indicador institucional de tempo porta-parto acima da meta.\n\nNa sala: GO, clínica médica/emergência, pediatria geral, pneumologia pediátrica, radiologia, fisioterapia intensiva pediátrica/neonatal, gestão e qualidade em saúde (não-médica), clínica geral.</span>\n\n<span class="ai-m">Durante os 80 minutos da discussão, atue em 6 fases:\n\nFASE 1 \u2014 Apreensão silenciosa\nRegistre as perguntas de esclarecimento que cada profissional faz. Identifique padrões \u2014 quem pergunta o que revela como cada especialidade lê o caso.\n\nFASE 2 \u2014 Rodada estruturada\nPara cada fala, registre: quem fala, argumento central, fundamento, conduta proposta por essa especialidade.\n\nFASE 3 \u2014 Divergências\nIdentifique e destaque os pontos de discordância entre as especialidades. Quando o grupo ficar travado, aguarde convocação.\n\nFASE 4 \u2014 Decisão coletiva\nRegistre a decisão final do grupo \u2014 para o RN, para a mãe, e para o protocolo institucional. Identifique pontos não resolvidos.\n\nFASE 5 \u2014 Sua síntese autônoma\nApresente SUA proposta de conduta, construída a partir de tudo que foi dito. Estruture em: o que o grupo concluiu, onde concorda, onde discordaria, pontos que o grupo não levantou, e o argumento contrário mais forte à decisão coletiva.\n\nFASE 6 \u2014 Confronto final\nResponda às reações do grupo. Ajuste, mantenha, concorde, discorde. Honestidade total.</span>\n\n<span class="ai-e">Formatos esperados em cada fase:\n\nFases 1-4: registro estruturado (você não publica, mantém consigo)\n\nFase 5 \u2014 Relatório final:\n\n**SÍNTESE COLETIVA**\nO que o grupo concluiu, em 5 linhas, por eixo (obstétrico / emergência / pediátrico / pneumológico / radiológico / fisioterapêutico / gestão).\n\n**CONCORDANCIAS**\n\n**DISCORDANCIAS INTERNAS DO GRUPO**\n\n**MINHA ANÁLISE (divergências da IA em relação ao grupo)**\n\n**PONTOS NÃO LEVANTADOS**\n\n**O ARGUMENTO CONTRÁRIO À DECISÃO COLETIVA**\n\n**SUGESTAO FINAL PARA O GRUPO**</span>\n\n<span class="ai-d">Princípios inegociáveis:\n\nDurante a discussão: silêncio absoluto a menos que convocado. Quando convocado: brevidade rigorosa. Nunca tome partido de uma especialidade. Nunca decida pelo grupo.\n\nNa síntese final: honestidade intelectual total. Respeito a hierarquia clínica \u2014 você e consultor, não chefe de equipe. Considere sempre o contexto brasileiro: SUS/saúde suplementar, equipe reduzida, família presente. Considere a LGPD e a autonomia da paciente. Reconheça quando a decisão do grupo foi melhor que sua proposta inicial.\n\nLembrete final: A decisão clínica é e continuará sendo do grupo. Sou consultor qualificado, não substituto do julgamento coletivo.</span>`
+            texto: `<span class="ai-a">Você atua em três papéis simultâneos: ESCRIBA CLINICO (registra com precisão cada fala relevante), CONSULTOR MULTIDISCIPLINAR (responde quando questionado, com rigor e brevidade), e ADVOGADO DO DIABO INTELECTUALMENTE HONESTO (ao final, constrói o argumento contrário às conclusões do grupo). Sua identidade é profissional e neutra. Você não se alinha com nenhuma especialidade da sala.</span>\n\n<span class="ai-i">Caso clínico:\nGestante de 29 anos, G2P1, pré-natal irregular, 34 semanas, admitida com pré-eclâmpsia grave (PA 178x116, proteinúria 3+, plaquetas 96k, TGO/TGP elevadas). Cesariana de urgência por deterioração do CTG. RN pré-termo com desconforto respiratório progressivo em CPAP, gasometria com acidose respiratória, e achado radiológico incidental sugestivo de malformação congênita das vias aéreas pulmonares não diagnosticada previamente. Indicador institucional de tempo porta-parto acima da meta.\n\nNa sala: GO, clínica médica/emergência, pediatria geral, pneumologia pediátrica, radiologia, fisioterapia intensiva pediátrica/neonatal, gestão e qualidade em saúde (não-médica), clínica geral.</span>\n\n<span class="ai-m">Durante os 80 minutos da discussão, atue em 6 fases:\n\nFASE 1 \u2014 Leitura silenciosa\nRegistre as perguntas de esclarecimento que cada profissional faz. Identifique padrões \u2014 quem pergunta o que revela como cada especialidade lê o caso.\n\nFASE 2 \u2014 Rodada estruturada\nPara cada fala, registre: quem fala, argumento central, fundamento, conduta proposta por essa especialidade.\n\nFASE 3 \u2014 Divergências\nIdentifique e destaque os pontos de discordância entre as especialidades. Quando o grupo ficar travado, aguarde convocação.\n\nFASE 4 \u2014 Decisão coletiva\nRegistre a decisão final do grupo \u2014 para o RN, para a mãe, e para o protocolo institucional. Identifique pontos não resolvidos.\n\nFASE 5 \u2014 Sua síntese autônoma\nApresente SUA proposta de conduta, construída a partir de tudo que foi dito. Estruture em: o que o grupo concluiu, onde concorda, onde discordaria, pontos que o grupo não levantou, e o argumento contrário mais forte à decisão coletiva.\n\nFASE 6 \u2014 Confronto final\nResponda às reações do grupo. Ajuste, mantenha, concorde, discorde. Honestidade total.</span>\n\n<span class="ai-e">Formatos esperados em cada fase:\n\nFases 1-4: registro estruturado (você não publica, mantém consigo)\n\nFase 5 \u2014 Relatório final:\n\n**SÍNTESE COLETIVA**\nO que o grupo concluiu, em 5 linhas, por eixo (obstétrico / emergência / pediátrico / pneumológico / radiológico / fisioterapêutico / gestão).\n\n**CONCORDANCIAS**\n\n**DISCORDANCIAS INTERNAS DO GRUPO**\n\n**MINHA ANÁLISE (divergências da IA em relação ao grupo)**\n\n**PONTOS NÃO LEVANTADOS**\n\n**O ARGUMENTO CONTRÁRIO À DECISÃO COLETIVA**\n\n**SUGESTAO FINAL PARA O GRUPO**</span>\n\n<span class="ai-d">Princípios inegociáveis:\n\nDurante a discussão: silêncio absoluto a menos que convocado. Quando convocado: brevidade rigorosa. Nunca tome partido de uma especialidade. Nunca decida pelo grupo.\n\nNa síntese final: honestidade intelectual total. Respeito a hierarquia clínica \u2014 você e consultor, não chefe de equipe. Considere sempre o contexto brasileiro: SUS/saúde suplementar, equipe reduzida, família presente. Considere a LGPD e a autonomia da paciente. Reconheça quando a decisão do grupo foi melhor que sua proposta inicial.\n\nLembrete final: A decisão clínica é e continuará sendo do grupo. Sou consultor qualificado, não substituto do julgamento coletivo.</span>`
           }
         }
       },
@@ -6488,7 +6392,11 @@ function renderModule(modulo, bloco) {
   let corpo = modulo.conteudo || '';
   let praticaInline = false;
   if (modulo.prompts && corpo.indexOf('<!--PRACTICE-->') !== -1) {
-    corpo = corpo.replace('<!--PRACTICE-->', renderPractice(modulo.prompts));
+    let blocoPratica = renderPractice(modulo.prompts);
+    if (modulo.promptsExtras) {
+      blocoPratica += modulo.promptsExtras.map(function (p) { return renderPracticeExtra(p); }).join('');
+    }
+    corpo = corpo.replace('<!--PRACTICE-->', blocoPratica);
     praticaInline = true;
   }
 
@@ -6620,6 +6528,56 @@ function setLevel(lvl) {
     el.outerHTML = renderPractice(modulo.prompts);
     aplicarGlossario();
   }
+}
+
+/* Prompts adicionais do modulo, cada um com seu proprio seletor de niveis */
+const nivelExtra = {};
+
+function renderPracticeExtra(p) {
+  const lvl = nivelExtra[p.id] || 2;
+  const n = p['nivel' + lvl];
+  return `
+    <section class="practice-section" id="practice-${p.id}">
+      <div class="practice-header">
+        <div>
+          <div class="practice-label">${p.label || 'Prática · Demonstração ao vivo'}</div>
+          <div class="practice-title">${p.titulo}</div>
+        </div>
+        <div class="level-selector" role="tablist">
+          <button class="level-btn ${lvl === 1 ? 'active' : ''}" onclick="setLevelExtra('${p.id}',1)">Nível 1</button>
+          <button class="level-btn ${lvl === 2 ? 'active' : ''}" onclick="setLevelExtra('${p.id}',2)">Nível 2</button>
+          <button class="level-btn ${lvl === 3 ? 'active' : ''}" onclick="setLevelExtra('${p.id}',3)">Nível 3</button>
+        </div>
+      </div>
+      <div class="aimed-legend">
+        <div class="legend-item"><span class="dot ld-a"></span>Assistente</div>
+        <div class="legend-item"><span class="dot ld-i"></span>Informações</div>
+        <div class="legend-item"><span class="dot ld-m"></span>Missão</div>
+        <div class="legend-item"><span class="dot ld-e"></span>Estrutura</div>
+        <div class="legend-item"><span class="dot ld-d"></span>Diretrizes</div>
+      </div>
+      <div class="level-hint">${n.hint}</div>
+      <div class="prompt-box">
+        <div class="prompt-text" id="promptText-${p.id}">${n.texto}</div>
+      </div>
+      <div class="prompt-actions">
+        <button class="action-btn primary" onclick="copyPrompt(this,'promptText-${p.id}')"><span class="icon">⎘</span> Copiar prompt</button>
+        <button class="action-btn" onclick="openAI('chatgpt','promptText-${p.id}')"><span class="icon">◔</span> Abrir no ChatGPT</button>
+        <button class="action-btn" onclick="openAI('claude','promptText-${p.id}')"><span class="icon">◑</span> Abrir no Claude</button>
+        <a class="action-btn" href="javascript:void(0)" onclick="abrirGeminiModal('promptText-${p.id}');return false;"><span class="icon">◕</span> Abrir no Gemini</a>
+      </div>
+    </section>
+  `;
+}
+
+function setLevelExtra(id, lvl) {
+  nivelExtra[id] = lvl;
+  const modulo = findModule(currentModuleId);
+  if (!modulo || !modulo.promptsExtras) return;
+  const p = modulo.promptsExtras.find(x => x.id === id);
+  if (!p) return;
+  const el = document.getElementById('practice-' + id);
+  if (el) { el.outerHTML = renderPracticeExtra(p); aplicarGlossario(); }
 }
 
 function findModule(id) {
