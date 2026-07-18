@@ -4751,12 +4751,26 @@ const PROGRAMA = [
             </div>
           </div>
 
-          <h3>Os prompts dos outros dois cenários</h3>
-          <p>O cenário 01 (laudo ditado) está na área de prática, no fim deste módulo. Os cenários 02 e 03 ficam aqui — copie e leve para o celular.</p>
+          <h3>Os comandos deste módulo</h3>
+          <p>Todos seguem o mesmo formato AIMED e têm os mesmos quatro botões — copiar, ChatGPT, Claude e Gemini. Abaixo estão os cenários 02 e 03, mais um comando extra para radiologia. O <strong>Cenário 01 — laudo ditado</strong> está na área de prática, no fim deste módulo, com os três níveis de profundidade.</p>
 
-          <div class="prompt-box" style="margin-top:16px">
-            <div class="callout-label" style="margin-bottom:12px">Cenário 02 · Discussão com colega virtual (Gemini Live)</div>
-            <div class="prompt-text" id="promptVozColega"><span class="ai-a">Use meu Perfil Clínico Permanente. Você é um(a) colega sênior da minha especialidade, com 20 anos de plantão. Tom de corredor, sem formalidade acadêmica. Me trate como igual.</span>
+          <section class="practice-section">
+            <div class="practice-header">
+              <div>
+                <div class="practice-label">Prática · Demonstração ao vivo</div>
+                <div class="practice-title">Cenário 02 · Comando para discussão com colega virtual</div>
+              </div>
+            </div>
+            <div class="aimed-legend">
+              <div class="legend-item"><span class="dot ld-a"></span>Assistente</div>
+              <div class="legend-item"><span class="dot ld-i"></span>Informações</div>
+              <div class="legend-item"><span class="dot ld-m"></span>Missão</div>
+              <div class="legend-item"><span class="dot ld-e"></span>Estrutura</div>
+              <div class="legend-item"><span class="dot ld-d"></span>Diretrizes</div>
+            </div>
+            <div class="level-hint">Para usar no Gemini Live ou no GPT Voice — a IA vira um colega sênior que interrompe, pergunta e provoca</div>
+            <div class="prompt-box">
+              <div class="prompt-text" id="promptVozColega"><span class="ai-a">Use meu Perfil Clínico Permanente. Você é um(a) colega sênior da minha especialidade, com 20 anos de plantão. Tom de corredor, sem formalidade acadêmica. Me trate como igual.</span>
 
 <span class="ai-i">Vou discutir um caso com você por voz, em tempo real. Posso trazer informação fora de ordem, hesitar e me corrigir — é conversa de colegas, não apresentação formal. Todos os dados são anonimizados: uso iniciais e idade aproximada.</span>
 
@@ -4775,17 +4789,32 @@ Ao final:
 <span class="ai-e">Responda em tom de conversa — sem markdown, sem bullets. Fale comigo como um colega falaria no corredor.</span>
 
 <span class="ai-d">Não me deixe errar feio: se eu estiver prestes a tomar uma decisão perigosa, me segure antes de eu terminar de falar. Nunca invente dose, protocolo ou referência. A decisão final é minha.</span></div>
-          </div>
-          <div class="prompt-actions">
-            <button class="action-btn primary" onclick="copyPrompt(this, 'promptVozColega')"><span class="icon">⎘</span> Copiar prompt</button>
-            <button class="action-btn" onclick="openAI('chatgpt','promptVozColega')"><span class="icon">◔</span> Abrir no ChatGPT</button>
-            <button class="action-btn" onclick="openAI('claude','promptVozColega')"><span class="icon">◑</span> Abrir no Claude</button>
-            <a class="action-btn" href="javascript:void(0)" onclick="abrirGeminiModal('promptVozColega');return false;"><span class="icon">◕</span> Abrir no Gemini</a>
-          </div>
+            </div>
+            <div class="prompt-actions">
+              <button class="action-btn primary" onclick="copyPrompt(this, 'promptVozColega')"><span class="icon">⎘</span> Copiar prompt</button>
+              <button class="action-btn" onclick="openAI('chatgpt','promptVozColega')"><span class="icon">◔</span> Abrir no ChatGPT</button>
+              <button class="action-btn" onclick="openAI('claude','promptVozColega')"><span class="icon">◑</span> Abrir no Claude</button>
+              <a class="action-btn" href="javascript:void(0)" onclick="abrirGeminiModal('promptVozColega');return false;"><span class="icon">◕</span> Abrir no Gemini</a>
+            </div>
+          </section>
 
-          <div class="prompt-box" style="margin-top:16px">
-            <div class="callout-label" style="margin-bottom:12px">Cenário 03 · Análise pós-consulta (áudio de 60 segundos)</div>
-            <div class="prompt-text" id="promptVozPosConsulta"><span class="ai-a">Use meu Perfil Clínico Permanente. Você é assistente de organização clínica pós-atendimento.</span>
+          <section class="practice-section">
+            <div class="practice-header">
+              <div>
+                <div class="practice-label">Prática · Demonstração ao vivo</div>
+                <div class="practice-title">Cenário 03 · Comando para análise pós-consulta</div>
+              </div>
+            </div>
+            <div class="aimed-legend">
+              <div class="legend-item"><span class="dot ld-a"></span>Assistente</div>
+              <div class="legend-item"><span class="dot ld-i"></span>Informações</div>
+              <div class="legend-item"><span class="dot ld-m"></span>Missão</div>
+              <div class="legend-item"><span class="dot ld-e"></span>Estrutura</div>
+              <div class="legend-item"><span class="dot ld-d"></span>Diretrizes</div>
+            </div>
+            <div class="level-hint">Grave um áudio de 60 segundos ao sair da consulta — a IA devolve condutas, pendências, retorno e alertas</div>
+            <div class="prompt-box">
+              <div class="prompt-text" id="promptVozPosConsulta"><span class="ai-a">Use meu Perfil Clínico Permanente. Você é assistente de organização clínica pós-atendimento.</span>
 
 <span class="ai-i">Vou gravar um áudio de até 60 segundos resumindo uma consulta que acabei de fazer. Vou falar rápido e desorganizado, do jeito que sai entre um paciente e outro. Dados anonimizados: uso iniciais e idade aproximada.</span>
 
@@ -4800,26 +4829,78 @@ Se houver algo que exige ação ainda hoje, coloque no topo, em destaque.</span>
 
 <span class="ai-e">Formato:
 
-**Caso:** [2 linhas]
+Caso: [2 linhas]
 
-**Condutas:** [lista]
+Condutas: [lista]
 
-**Pendências:** [lista com responsável e prazo]
+Pendências: [lista com responsável e prazo]
 
-**Retorno:** [quando + o quê]
+Retorno: [quando + o quê]
 
-**Alertas:** [se houver; se não houver, escreva "sem alertas"]
+Alertas: [se houver; se não houver, escreva "sem alertas"]
 
 Ao final, gere uma linha pronta para colar no prontuário.</span>
 
 <span class="ai-d">Não invente conduta que eu não disse. Se algo ficou ambíguo no áudio, marque como [confirmar] em vez de deduzir. Nunca registre nome completo, CPF ou número de prontuário — se eu falar, substitua por iniciais.</span></div>
-          </div>
-          <div class="prompt-actions">
-            <button class="action-btn primary" onclick="copyPrompt(this, 'promptVozPosConsulta')"><span class="icon">⎘</span> Copiar prompt</button>
-            <button class="action-btn" onclick="openAI('chatgpt','promptVozPosConsulta')"><span class="icon">◔</span> Abrir no ChatGPT</button>
-            <button class="action-btn" onclick="openAI('claude','promptVozPosConsulta')"><span class="icon">◑</span> Abrir no Claude</button>
-            <a class="action-btn" href="javascript:void(0)" onclick="abrirGeminiModal('promptVozPosConsulta');return false;"><span class="icon">◕</span> Abrir no Gemini</a>
-          </div>
+            </div>
+            <div class="prompt-actions">
+              <button class="action-btn primary" onclick="copyPrompt(this, 'promptVozPosConsulta')"><span class="icon">⎘</span> Copiar prompt</button>
+              <button class="action-btn" onclick="openAI('chatgpt','promptVozPosConsulta')"><span class="icon">◔</span> Abrir no ChatGPT</button>
+              <button class="action-btn" onclick="openAI('claude','promptVozPosConsulta')"><span class="icon">◑</span> Abrir no Claude</button>
+              <a class="action-btn" href="javascript:void(0)" onclick="abrirGeminiModal('promptVozPosConsulta');return false;"><span class="icon">◕</span> Abrir no Gemini</a>
+            </div>
+          </section>
+
+          <section class="practice-section">
+            <div class="practice-header">
+              <div>
+                <div class="practice-label">Prática · Feito para o Thiago · Radiologia</div>
+                <div class="practice-title">Bônus · Comando para laudo radiológico estruturado</div>
+              </div>
+            </div>
+            <div class="aimed-legend">
+              <div class="legend-item"><span class="dot ld-a"></span>Assistente</div>
+              <div class="legend-item"><span class="dot ld-i"></span>Informações</div>
+              <div class="legend-item"><span class="dot ld-m"></span>Missão</div>
+              <div class="legend-item"><span class="dot ld-e"></span>Estrutura</div>
+              <div class="legend-item"><span class="dot ld-d"></span>Diretrizes</div>
+            </div>
+            <div class="level-hint">Thiago, este é o seu: dite o exame e receba Técnica, Achados, Impressão diagnóstica e conduta para cada achado incidental</div>
+            <div class="prompt-box">
+              <div class="prompt-text" id="promptVozRadiologia"><span class="ai-a">Use meu Perfil Clínico Permanente. Você é radiologista sênior e assistente de redação de laudo estruturado, com domínio dos sistemas de classificação padronizada (BI-RADS, Lung-RADS, PI-RADS, TI-RADS, LI-RADS) e do português técnico brasileiro.</span>
+
+<span class="ai-i">Vou ditar por voz os achados de um exame de imagem. Vou informar a modalidade e a região (ex.: TC de tórax com contraste), a indicação clínica e os achados na ordem em que eu os vejo — podendo hesitar, voltar atrás e me corrigir. Se houver exame prévio para comparação, eu aviso. Dados anonimizados: uso iniciais e idade aproximada.</span>
+
+<span class="ai-m">Transforme minha fala em laudo estruturado:
+1. Separe o conteúdo clínico das hesitações e correções — use sempre a versão corrigida
+2. Organize em: Técnica, Achados (por estrutura), Impressão diagnóstica, Recomendação
+3. Se houver sistema de classificação aplicável ao exame, sugira a categoria e diga em que critério se baseou
+4. Separe os achados ligados à indicação clínica dos achados incidentais
+5. Para cada achado incidental, proponha conduta explícita — inclusive "não requer seguimento", quando for o caso</span>
+
+<span class="ai-e">Formato:
+
+Técnica: [modalidade, contraste, protocolo]
+
+Achados: [organizados por estrutura]
+
+Impressão diagnóstica: [numerada, do mais para o menos relevante]
+
+Achados incidentais: [cada um com conduta e prazo]
+
+Recomendação: [exame complementar + prazo, ou "sem necessidade de complementação"]
+
+Ao final, liste o que ficou ambíguo no meu ditado, marcado como [confirmar].</span>
+
+<span class="ai-d">Nunca invente medida, densidade, sinal ou categoria que eu não tenha ditado — se faltar, escreva [não informado]. Não conclua malignidade ou benignidade com certeza absoluta: trabalhe em graus de suspeição. Se eu ditar um achado crítico (pneumotórax hipertensivo, TEP central, hemorragia ativa, isquemia intestinal), sinalize no topo antes do laudo. O laudo final e a responsabilidade são minhas.</span></div>
+            </div>
+            <div class="prompt-actions">
+              <button class="action-btn primary" onclick="copyPrompt(this, 'promptVozRadiologia')"><span class="icon">⎘</span> Copiar prompt</button>
+              <button class="action-btn" onclick="openAI('chatgpt','promptVozRadiologia')"><span class="icon">◔</span> Abrir no ChatGPT</button>
+              <button class="action-btn" onclick="openAI('claude','promptVozRadiologia')"><span class="icon">◑</span> Abrir no Claude</button>
+              <a class="action-btn" href="javascript:void(0)" onclick="abrirGeminiModal('promptVozRadiologia');return false;"><span class="icon">◕</span> Abrir no Gemini</a>
+            </div>
+          </section>
 
           <h3>Exercício guiado</h3>
           <p>Cada participante vai fazer <strong>um laudo ditado</strong> ao vivo, no próprio celular, com um caso da sua especialidade. Vamos ver o texto formatado nascer na tela de todo mundo.</p>
@@ -4830,7 +4911,7 @@ Ao final, gere uma linha pronta para colar no prontuário.</span>
           </div>
         `,
         prompts: {
-          titulo: 'Comando para laudo ditado por voz',
+          titulo: 'Cenário 01 · Comando para laudo ditado por voz',
           nivel1: {
             hint: 'Pedido simples — funciona para laudos curtos',
             texto: `Vou ditar um laudo. Transcreva corrigindo gramática e formatando em parágrafos claros. Responda em linguagem médica formal.`
