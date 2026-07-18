@@ -4476,7 +4476,7 @@ const PROGRAMA = [
             </div>
             <div class="checklist-item">
               <div class="check-box done">✓</div>
-              <div class="check-text">Um <strong>prompt blindado de segurança medicamentosa</strong> que já pode ir para o consultório na segunda</div>
+              <div class="check-text">Um <strong>Perfil Clínico Permanente</strong> escrito por você e ativo nas três IAs — mais a voz clínica testada no celular</div>
             </div>
             <div class="checklist-item">
               <div class="check-box done">✓</div>
@@ -4751,6 +4751,76 @@ const PROGRAMA = [
             </div>
           </div>
 
+          <h3>Os prompts dos outros dois cenários</h3>
+          <p>O cenário 01 (laudo ditado) está na área de prática, no fim deste módulo. Os cenários 02 e 03 ficam aqui — copie e leve para o celular.</p>
+
+          <div class="prompt-box" style="margin-top:16px">
+            <div class="callout-label" style="margin-bottom:12px">Cenário 02 · Discussão com colega virtual (Gemini Live)</div>
+            <div class="prompt-text" id="promptVozColega"><span class="ai-a">Use meu Perfil Clínico Permanente. Você é um(a) colega sênior da minha especialidade, com 20 anos de plantão. Tom de corredor, sem formalidade acadêmica. Me trate como igual.</span>
+
+<span class="ai-i">Vou discutir um caso com você por voz, em tempo real. Posso trazer informação fora de ordem, hesitar e me corrigir — é conversa de colegas, não apresentação formal. Todos os dados são anonimizados: uso iniciais e idade aproximada.</span>
+
+<span class="ai-m">Durante a minha fala:
+- Se eu disser algo clinicamente preocupante, me interrompa na hora
+- Se faltar um dado crítico para você opinar, pergunte
+- Se o caso for direto, diga logo e não enrole
+
+Ao final:
+1. Repita o caso em 3 linhas para eu confirmar que você entendeu
+2. Diga sua hipótese principal e o porquê
+3. Diga o que você faria nos próximos 30 minutos
+4. Diga o que você NÃO faria e por quê
+5. Aponte 1 ponto cego do meu raciocínio</span>
+
+<span class="ai-e">Responda em tom de conversa — sem markdown, sem bullets. Fale comigo como um colega falaria no corredor.</span>
+
+<span class="ai-d">Não me deixe errar feio: se eu estiver prestes a tomar uma decisão perigosa, me segure antes de eu terminar de falar. Nunca invente dose, protocolo ou referência. A decisão final é minha.</span></div>
+          </div>
+          <div class="prompt-actions">
+            <button class="action-btn primary" onclick="copyPrompt(this, 'promptVozColega')"><span class="icon">⎘</span> Copiar prompt</button>
+            <button class="action-btn" onclick="openAI('chatgpt','promptVozColega')"><span class="icon">◔</span> Abrir no ChatGPT</button>
+            <button class="action-btn" onclick="openAI('claude','promptVozColega')"><span class="icon">◑</span> Abrir no Claude</button>
+            <a class="action-btn" href="javascript:void(0)" onclick="abrirGeminiModal('promptVozColega');return false;"><span class="icon">◕</span> Abrir no Gemini</a>
+          </div>
+
+          <div class="prompt-box" style="margin-top:16px">
+            <div class="callout-label" style="margin-bottom:12px">Cenário 03 · Análise pós-consulta (áudio de 60 segundos)</div>
+            <div class="prompt-text" id="promptVozPosConsulta"><span class="ai-a">Use meu Perfil Clínico Permanente. Você é assistente de organização clínica pós-atendimento.</span>
+
+<span class="ai-i">Vou gravar um áudio de até 60 segundos resumindo uma consulta que acabei de fazer. Vou falar rápido e desorganizado, do jeito que sai entre um paciente e outro. Dados anonimizados: uso iniciais e idade aproximada.</span>
+
+<span class="ai-m">A partir do meu áudio, extraia e organize:
+1. Resumo do caso em 2 linhas
+2. Condutas definidas (o que foi prescrito ou solicitado)
+3. Pendências (o que ficou em aberto e depende de mim)
+4. Retorno (quando, e com o quê)
+5. Alertas (sinais de gravidade, interações, algo que eu deva revisar)
+
+Se houver algo que exige ação ainda hoje, coloque no topo, em destaque.</span>
+
+<span class="ai-e">Formato:
+
+**Caso:** [2 linhas]
+
+**Condutas:** [lista]
+
+**Pendências:** [lista com responsável e prazo]
+
+**Retorno:** [quando + o quê]
+
+**Alertas:** [se houver; se não houver, escreva "sem alertas"]
+
+Ao final, gere uma linha pronta para colar no prontuário.</span>
+
+<span class="ai-d">Não invente conduta que eu não disse. Se algo ficou ambíguo no áudio, marque como [confirmar] em vez de deduzir. Nunca registre nome completo, CPF ou número de prontuário — se eu falar, substitua por iniciais.</span></div>
+          </div>
+          <div class="prompt-actions">
+            <button class="action-btn primary" onclick="copyPrompt(this, 'promptVozPosConsulta')"><span class="icon">⎘</span> Copiar prompt</button>
+            <button class="action-btn" onclick="openAI('chatgpt','promptVozPosConsulta')"><span class="icon">◔</span> Abrir no ChatGPT</button>
+            <button class="action-btn" onclick="openAI('claude','promptVozPosConsulta')"><span class="icon">◑</span> Abrir no Claude</button>
+            <a class="action-btn" href="javascript:void(0)" onclick="abrirGeminiModal('promptVozPosConsulta');return false;"><span class="icon">◕</span> Abrir no Gemini</a>
+          </div>
+
           <h3>Exercício guiado</h3>
           <p>Cada participante vai fazer <strong>um laudo ditado</strong> ao vivo, no próprio celular, com um caso da sua especialidade. Vamos ver o texto formatado nascer na tela de todo mundo.</p>
 
@@ -4819,37 +4889,37 @@ const PROGRAMA = [
           </div>
 
           <h3>Casos específicos da turma</h3>
-          <p>Esta turma tem 7 ginecologistas/obstetras e 1 enfermeira obstétrica. O módulo vai focar pesadamente em dois universos críticos da obstetrícia, além de alguns específicos das outras especialidades.</p>
+          <p>Esta turma reúne pediatria, ginecologia e obstetrícia, clínica médica e emergência, pneumologia pediátrica, clínica geral, gestão e qualidade em saúde, fisioterapia intensiva pediátrica/neonatal e radiologia. O módulo foca nos três universos medicamentosos que mais aparecem nessa composição.</p>
 
           <div class="platform-grid">
             <div class="platform-card gpt">
-              <div class="platform-name">Gestação</div>
-              <div class="platform-role">Obstetrícia · GOs + Enfermagem</div>
+              <div class="platform-name">Pediatria e Neonatologia</div>
+              <div class="platform-role">Pediatria · Pneumo Ped · Fisio Intensiva</div>
               <ul class="platform-steps">
-                <li>Classificação de risco medicamentoso (FDA/ANVISA)</li>
-                <li>Ajuste por trimestre de gestação</li>
-                <li>Hipotensores, anticoagulantes, antibióticos</li>
-                <li>Sulfato de magnésio — dose + janela de toxicidade</li>
+                <li>Dose por peso (mg/kg) e ajuste por faixa etária</li>
+                <li>Prematuridade e função renal imatura</li>
+                <li>Broncodilatadores e corticoides — asma e bronquiolite</li>
+                <li>Drogas vasoativas em UTI pediátrica e neonatal</li>
               </ul>
             </div>
             <div class="platform-card claude">
-              <div class="platform-name">Puerpério / Lactação</div>
+              <div class="platform-name">Gestação e Puerpério</div>
               <div class="platform-role">Obstetrícia + Pediatria</div>
               <ul class="platform-steps">
+                <li>Classificação de risco medicamentoso (FDA/ANVISA)</li>
+                <li>Ajuste por trimestre de gestação</li>
+                <li>Sulfato de magnésio — dose + janela de toxicidade</li>
                 <li>Medicações compatíveis com amamentação</li>
-                <li>Analgesia pós-parto segura</li>
-                <li>Transferência placentária vs lactação</li>
-                <li>Psicofármacos no puerpério</li>
               </ul>
             </div>
             <div class="platform-card gemini">
-              <div class="platform-name">Específicos da turma</div>
-              <div class="platform-role">Card. / Pneumo / Intensivo</div>
+              <div class="platform-name">Adulto, Emergência e Polifarmácia</div>
+              <div class="platform-role">Clínica Médica · Emergência · Gestão</div>
               <ul class="platform-steps">
-                <li>Anticoagulação em cardiopatias</li>
-                <li>Broncodilatadores + ajuste em asma grave</li>
-                <li>Drogas vasoativas em UTI</li>
+                <li>Ajuste por função renal e hepática</li>
                 <li>Interações em polifarmácia do idoso</li>
+                <li>Anticoagulação e drogas de emergência</li>
+                <li>Indicadores de segurança medicamentosa e near miss</li>
               </ul>
             </div>
           </div>
@@ -6031,14 +6101,14 @@ const PROGRAMA = [
               <div class="capability-icon">◈</div>
               <div class="capability-content">
                 <div class="capability-title">Observe os padrões</div>
-                <div class="capability-text">Algumas ferramentas vão ter estruturas que você pode adaptar. Anote: "a Natiéle fez X — posso fazer parecido para Y na minha área."</div>
+                <div class="capability-text">Algumas ferramentas vão ter estruturas que você pode adaptar. Anote: "o Thiago resolveu X assim na radiologia — posso fazer parecido para Y na minha área."</div>
               </div>
             </div>
             <div class="capability-card">
               <div class="capability-icon">◉</div>
               <div class="capability-content">
                 <div class="capability-title">Identifique complementaridades</div>
-                <div class="capability-text">A ferramenta de obstetrícia da Valéria pode precisar da análise cardíaca do André. Conexões que nascem aqui viram colaborações depois.</div>
+                <div class="capability-text">A ferramenta obstétrica do Reberti pode precisar do olhar pediátrico da Nirai; o painel de indicadores da Pricila conversa direto com a fisioterapia da Dagmar. Conexões que nascem aqui viram colaborações depois.</div>
               </div>
             </div>
             <div class="capability-card">
